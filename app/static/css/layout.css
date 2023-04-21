@@ -1,0 +1,47 @@
+:root {
+  --blue: #144999;
+  --blue-hover: #103b7d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+
+#navbar-light {
+  padding: 0;
+}
+
+#navbar-light .container-fluid {
+  background: var(--blue);
+}
+
+#navbarNav ul {
+  margin: 0 auto;
+}
+
+.navbar-nav li {
+  color: white;
+  padding: 15px 5px;
+  font-size: 1.1rem;
+}
+
+.navbar-nav li:hover {
+  background: var(--blue-hover);
+  transition: all ease-in 0.3s;
+}
+
+.nav-item .nav-link * {
+  color: white;
+  margin: 0 2px;
+}
+
+.nav-item .user * {
+  color: greenyellow;
+}
+
+.nav-item .logout * {
+  color: red;
+}
