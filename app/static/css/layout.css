@@ -1,6 +1,10 @@
+@import url('general.css');
+
 :root {
   --blue: #144999;
   --blue-hover: #103b7d;
+  --buttons-blue: #2e5eb0;
+  --gray-borders: #adaaaa;
 }
 
 * {
@@ -44,4 +48,19 @@
 
 .nav-item .logout * {
   color: red;
+}
+
+
+/* Company nav */
+
+.company-name-date {
+  padding: 40px 5px;
+}
+
+.company-name-date * {
+  margin: 0;
+}
+
+.logo img {
+  width: 160px;
 }

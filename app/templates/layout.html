@@ -82,6 +82,17 @@
       </div>
     </nav>
 
+    <!-- nav company -->
+    <div class="container-fluid div-company d-flex justify-content-between">
+      <div class="company-name-date">
+        <h1>CLINIC PROJECT</h1>
+        <strong><small>Sábado 20 de Abril del 2023</small></strong>
+      </div>
+      <div class="logo">
+        <img src="../static/css/images/clinic-logo.jpg" alt="">
+      </div>
+    </div>
+
     <!-- Bootstrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -93,5 +104,9 @@
       integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
       crossorigin="anonymous"
     ></script>
+
+
+    {% block body %}
+    {% endblock %}
   </body>
 </html>

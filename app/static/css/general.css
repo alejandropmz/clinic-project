@@ -1,0 +1,54 @@
+/* sub nav */
+
+.sub-nav {
+  padding: 0 20px;
+}
+
+.sub-nav div {
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .sub-nav div:first-child {
+    justify-content: start;
+  }
+
+  .sub-nav div:nth-child(2) {
+    justify-content: end;
+  }
+}
+
+.sub-nav div form button {
+  border: none;
+  padding: 5px;
+  background: var(--buttons-blue);
+  color: white;
+}
+
+.sub-nav i {
+  margin-right: 5px;
+  font-size: 1.5rem;
+}
+
+.detail {
+  border: solid var(--gray-borders);
+  border-width: 1px 0 1px;
+  padding: 2px 0;
+}
+
+.detail * {
+  margin: 0;
+}
+
+.sub-nav div form input {
+  height: 2rem;
+  padding: 0 5px;
+}
+
+.sub-nav div form input:focus,
+.sub-nav div form input:active {
+  outline: none;
+}
