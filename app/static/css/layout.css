@@ -1,9 +1,12 @@
-@import url('general.css');
+@import url("general.css");
 
 :root {
   --blue: #144999;
   --blue-hover: #103b7d;
   --buttons-blue: #2e5eb0;
+  --buttons-blue-hover: #1b4794;
+  --green-buttons: #26a132;
+  --green-buttons-hover: #1b7824;
   --gray-borders: #adaaaa;
 }
 
@@ -49,7 +52,6 @@
 .nav-item .logout * {
   color: red;
 }
-
 
 /* Company nav */
 

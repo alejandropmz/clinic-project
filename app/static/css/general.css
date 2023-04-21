@@ -1,7 +1,7 @@
 /* sub nav */
 
 .sub-nav {
-  padding: 0 20px;
+  padding: 30px 0;
 }
 
 .sub-nav div {
@@ -11,21 +11,17 @@
   align-items: center;
 }
 
-@media screen and (min-width: 768px) {
-  .sub-nav div:first-child {
-    justify-content: start;
-  }
-
-  .sub-nav div:nth-child(2) {
-    justify-content: end;
-  }
-}
-
 .sub-nav div form button {
   border: none;
-  padding: 5px;
+  padding: 4px;
   background: var(--buttons-blue);
   color: white;
+  border-radius: 2px;
+}
+
+.sub-nav div form button:hover {
+  background: var(--buttons-blue-hover);
+  transition: all ease-in 0.3s;
 }
 
 .sub-nav i {
@@ -51,4 +47,47 @@
 .sub-nav div form input:focus,
 .sub-nav div form input:active {
   outline: none;
+}
+
+/* options bar */
+
+.options-bar .buttons {
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons button {
+  border: none;
+  padding: 5px 10px;
+  background: var(--green-buttons);
+  color: white;
+  border-radius: 2px;
+}
+
+.buttons button:hover {
+  background: var(--green-buttons-hover);
+  transition: all ease-in 0.3s;
+}
+
+.options-bar .pagination {
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* media querys */
+
+@media screen and (min-width: 768px) {
+  .sub-nav div:first-child,
+  .options-bar .buttons {
+    justify-content: start;
+  }
+
+  .sub-nav div:nth-child(2),
+  .options-bar .pagination {
+    justify-content: end;
+  }
 }

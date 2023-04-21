@@ -1,6 +1,8 @@
 {% extends "layout.html" %} {% block body %}
 
-<div class="row sub-nav d-flex justify-content-between">
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
   <div class="col-sm-12 col-md-6">
     <i class="bx bx-male-female"></i>
     <div class="detail">
@@ -9,10 +11,29 @@
   </div>
   <div class="col-sm-12 col-md-6">
     <form action="">
-      <input type="text" />
+      <input type="text" placeholder="Buscar paciente" />
       <button>Buscar</button>
     </form>
   </div>
 </div>
+
+<!-- options bar -->
+
+<div class="row container-fluid options-bar">
+  <div class="col-sm-12 col-md-6 buttons">
+    <button>Agregar paciente</button>
+  </div>
+  <div class="col-sm-12 col-md-6 pagination">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- render data information -->
 
 {% endblock %}
