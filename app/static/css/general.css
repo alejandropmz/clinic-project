@@ -128,9 +128,6 @@
   transition: all ease-in 0.3s;
 }
 
-#dropdownMenuButton1:focus-visible {
-  outline: none;
-}
 
 .options-buttons button {
   border: none;
@@ -218,6 +215,32 @@
   transition: all ease-in 0.3s;
 }
 
+#save-button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--green-buttons);
+  color: white;
+}
+
+#save-button:hover {
+  background: var(--green-buttons-hover);
+  transition: all ease-in 0.3s;
+}
+
+
+#delete-button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--delete-red);
+  color: white;
+}
+
+#delete-button:hover {
+  background: var(--delete-red-hover);
+  transition: all ease-in 0.3s;
+}
 
 
 /* media querys */

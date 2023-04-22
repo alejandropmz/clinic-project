@@ -4,9 +4,9 @@
 
 <div class="row container-fluid sub-nav d-flex justify-content-between">
   <div class="col-sm-12 col-md-6">
-    <i class="bx bx-user"></i>
+    <i class="bx bx-edit"></i>
     <div class="detail">
-      <h4>Información del paciente</h4>
+      <h4>Modificar paciente</h4>
     </div>
   </div>
 </div>
@@ -16,11 +16,20 @@
 <div class="detail-info-container">
   <h3>{{patient[2].title()}} {{patient[3].title()}}</h3>
 
-  <form class="d-flex flex-column">
+  <form
+    action="/guardar_edicion_paciente/{{patient[0]}}"
+    method="POST"
+    class="d-flex flex-column"
+  >
     <label for="id">
       <div>
         <span>Identificación</span>
-        <input value="{{patient[1]}}" readonly type="text" name="id" />
+        <input
+          value="{{patient[1]}}"
+          placeholder="Identificación"
+          type="text"
+          name="id"
+        />
       </div>
     </label>
     <label for="first-names">
@@ -28,7 +37,7 @@
         <span>Nombres</span>
         <input
           value="{{patient[2].title()}}"
-          readonly
+          placeholder="Nombres"
           type="text"
           name="first-names"
         />
@@ -39,7 +48,7 @@
         <span>Apellidos</span>
         <input
           value="{{patient[3].title()}}"
-          readonly
+          placeholder="Apellidos"
           type="text"
           name="last-names"
         />
@@ -49,9 +58,9 @@
       <div>
         <span>F. Nacimiento</span>
         <input
-          value="{{patient[4].split('-')[2]}}/{{patient[4].split('-')[1]}}/{{patient[4].split('-')[0]}}"
-          readonly
-          type="text"
+          value="{{patient[4]}}"
+          placeholder="Fecha de nacimiento"
+          type="date"
           name="birth-date"
         />
       </div>
@@ -59,29 +68,47 @@
     <label for="contact">
       <div>
         <span>Contacto</span>
-        <input value="{{patient[5]}}" type="text" name="contact" />
+        <input
+          value="{{patient[5]}}"
+          placeholder="Contacto"
+          type="text"
+          name="contact"
+        />
       </div>
     </label>
     <label for="email">
       <div>
         <span>Correo</span>
-        <input value="{{patient[6]}}" readonly type="text" name="email" />
+        <input
+          value="{{patient[6]}}"
+          placeholder="Correo electrónico"
+          type="email"
+          name="email"
+        />
       </div>
     </label>
     <label for="address">
       <div>
         <span>Dirección</span>
-        <input value="{{patient[7]}}" readonly type="text" name="address" />
+        <input
+          value="{{patient[7]}}"
+          placeholder="Dirección de domicilio"
+          type="text"
+          name="address"
+        />
       </div>
     </label>
     <!-- buttons -->
     <div class="d-flex justify-content-center detail-info-container-buttons">
       <a href="/pacientes"
-        ><button type="button" id="back-button">Atrás</button></a
+        ><button type="button" id="back-button">Cancelar</button></a
       >
       <a href="/editar_paciente/{{patient[0]}}">
-        <button type="button" id="modify-button">Modificar</button>
+        <button type="submit" id="save-button">Modificar</button>
       </a>
+    </div>
+    <div>
+      <button id="delete-button">Eliminar usuario</button>
     </div>
   </form>
 </div>

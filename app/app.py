@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_mysqldb import MySQL
 
 
@@ -41,8 +41,46 @@ def detalle_paciente(id):
     cursor.execute("SELECT * FROM pacientes WHERE id = %s", (id,))
     patient = cursor.fetchall()
     cursor.close()
-    print(patient)
     return render_template("patient-detail.html", patient=patient[0])
+
+
+@app.route("/editar_paciente/<int:id>")
+def editar_paciente(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM pacientes WHERE id = %s", (id,))
+    patient = cursor.fetchall()
+    cursor.close()
+    print(patient)
+    return render_template("edit-patient.html", patient=patient[0])
+
+
+@app.route("/guardar_edicion_paciente/<int:id>", methods=["POST"])
+def guardar_edicion_paciente(id):
+    ident = request.form["id"]
+    first_names = request.form["first-names"]
+    last_names = request.form["last-names"]
+    birth_date = request.form["birth-date"]
+    contact = request.form["contact"]
+    email = request.form["email"]
+    address = request.form["address"]
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    UPDATE pacientes
+    SET identificacion = %s,
+    nombres = %s,
+    apellidos = %s,
+    nacimiento = %s,
+    contacto = %s,
+    correo = %s,
+    direccion = %s
+    WHERE id = %s
+    """,
+        (ident, first_names, last_names, birth_date, contact, email, address, id),
+    )
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for("detalle_paciente", id=id))
 
 
 """ citas """

@@ -10,6 +10,8 @@
   --gray-borders: #adaaaa;
   --light-gray: #efeaea;
   --light-gray-hover: #d5d2d2;
+  --delete-red: #c42424;
+  --delete-red-hover: #a81212;
 }
 
 * {
