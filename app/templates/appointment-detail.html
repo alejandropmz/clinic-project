@@ -1,0 +1,75 @@
+{% extends "layout.html" %} {% block body %}
+
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
+  <div class="col-sm-12 col-md-6">
+    <i class="bx bx-detail"></i>
+    <div class="detail">
+      <h4>Información de la cita</h4>
+    </div>
+  </div>
+</div>
+
+<!-- Render information -->
+
+<div class="detail-info-container">
+  <h3>{{appointment[7].title()}} {{appointment[8].title()}}</h3>
+
+  <form class="d-flex flex-column">
+    <label for="patient">
+      <div>
+        <span>Paciente</span>
+        <input value="{{appointment[1]}}" readonly type="text" name="patient" />
+      </div>
+    </label>
+    <label for="date">
+      <div>
+        <span>Fecha</span>
+        <input
+          value="{{appointment[1]}}"
+          readonly
+          type="text"
+          name="date"
+        />
+      </div>
+    </label>
+    <label for="start">
+      <div>
+        <span>Incio</span>
+        <input value="{{appointment[2]}}" readonly type="text" name="start" />
+      </div>
+    </label>
+    <label for="end">
+      <div>
+        <span>Salida</span>
+        <input value="{{appointment[3]}}" readonly type="text" name="end" />
+      </div>
+    </label>
+    <label for="reason">
+      <div>
+        <span>Contacto</span>
+        <input value="{{appointment[5]}}" type="text" name="reason" />
+      </div>
+    </label>
+    <label for="contact">
+      <div>
+        <span>Contacto</span>
+        <input value="{{appointment[9]}}" readonly type="text" name="contact" />
+      </div>
+    </label>
+    <label for="email">
+      <div>
+        <span>Correo</span>
+        <input value="{{appointment[10]}}" readonly type="text" name="email" />
+      </div>
+    </label>
+    <!-- buttons -->
+    <div class="d-flex justify-content-center detail-info-container-buttons">
+      <a href="/citas"><button type="button" id="back-button">Atrás</button></a>
+      <button id="modify-button">Modificar</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

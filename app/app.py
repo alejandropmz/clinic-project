@@ -65,5 +65,24 @@ def citas():
     return render_template("appointments.html", appointments=all_data)
 
 
+@app.route("/citas/<int:id>")
+def detalle_cita(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pacientes.contacto, pacientes.correo
+    FROM citas
+    JOIN pacientes
+    ON citas.paciente = pacientes.id
+    WHERE citas.id = %s
+    """,
+        (id,),
+    )
+    appointment = cursor.fetchall()
+    cursor.close()
+    print(appointment)
+    return render_template("appointment-detail.html", appointment=appointment[0])
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=4000)
