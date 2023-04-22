@@ -108,6 +108,17 @@ def crear_paciente():
     return redirect(url_for("pacientes"))
 
 
+@app.route("/eliminar_paciente/<int:id>")
+def eliminar_paciente(id):
+    cursor = mysql.connection.cursor()
+    # patient appointments
+    cursor.execute("DELETE FROM citas WHERE paciente = %s", (id,))
+    cursor.execute("DELETE FROM pacientes WHERE id = %s", (id,))
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for("pacientes"))
+
+
 """ citas """
 
 
@@ -206,6 +217,7 @@ def crear_cita():
     start = request.form["start"]
     end = request.form["end"]
     reason = request.form["reason"]
+    patient = request.form["patient"]
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
@@ -213,7 +225,7 @@ def crear_cita():
     (fecha, ingreso, salida, razon, paciente, estado)
     VALUES (%s, %s, %s, %s, %s, %s)
     """,
-        (date, start, end, reason, patient[0][0], 1),
+        (date, start, end, reason, patient, 1),
     )
     mysql.connection.commit()
     cursor.close()

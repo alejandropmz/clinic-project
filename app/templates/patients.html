@@ -75,7 +75,7 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {% if appointments %} {% for appointment in appointments %} {% if
             appointment[4] in patient %}
-            <li><a class="dropdown-item" href="#">{{appointment[5]}}</a></li>
+            <li><a class="dropdown-item" href="/citas/{{appointment[0]}}">{{appointment[5]}}</a></li>
             {% endif %} {% endfor %} {% endif %}
           </ul>
         </div>

@@ -94,6 +94,10 @@
   width: 5%;
 }
 
+#forms table tr #status {
+  width: 5%;
+}
+
 #forms table tr * {
   text-align: center;
 }
