@@ -35,6 +35,16 @@ def pacientes():
     )
 
 
+@app.route("/pacientes/<int:id>")
+def detalle_paciente(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM pacientes WHERE id = %s", (id,))
+    patient = cursor.fetchall()
+    cursor.close()
+    print(patient)
+    return render_template("patient-detail.html", patient=patient[0])
+
+
 """ citas """
 
 

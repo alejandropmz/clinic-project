@@ -1,0 +1,87 @@
+{% extends "layout.html" %} {% block body %}
+
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
+  <div class="col-sm-12 col-md-6">
+    <i class="bx bx-user"></i>
+    <div class="detail">
+      <h4>Información del paciente</h4>
+    </div>
+  </div>
+</div>
+
+<!-- Render information -->
+
+<div class="detail-info-container">
+  <h3>{{patient[2].title()}} {{patient[3].title()}}</h3>
+
+  <form class="d-flex flex-column">
+    <label for="id">
+      <div>
+        <span>Identificación</span>
+        <input value="{{patient[1]}}" readonly type="text" name="id" />
+      </div>
+    </label>
+    <label for="first-names">
+      <div>
+        <span>Nombres</span>
+        <input
+          value="{{patient[2].title()}}"
+          readonly
+          type="text"
+          name="first-names"
+        />
+      </div>
+    </label>
+    <label for="last-names">
+      <div>
+        <span>Apellidos</span>
+        <input
+          value="{{patient[3].title()}}"
+          readonly
+          type="text"
+          name="last-names"
+        />
+      </div>
+    </label>
+    <label for="birth-date">
+      <div>
+        <span>F. Nacimiento</span>
+        <input
+          value="{{patient[4].split('-')[2]}}/{{patient[4].split('-')[1]}}/{{patient[4].split('-')[0]}}"
+          readonly
+          type="text"
+          name="birth-date"
+        />
+      </div>
+    </label>
+    <label for="contact">
+      <div>
+        <span>Contacto</span>
+        <input value="{{patient[5]}}" type="text" name="contact" />
+      </div>
+    </label>
+    <label for="email">
+      <div>
+        <span>Correo</span>
+        <input value="{{patient[6]}}" readonly type="text" name="email" />
+      </div>
+    </label>
+    <label for="address">
+      <div>
+        <span>Dirección</span>
+        <input value="{{patient[7]}}" readonly type="text" name="address" />
+      </div>
+    </label>
+    <!-- buttons -->
+    <div class="d-flex justify-content-center detail-info-container-buttons">
+      <a href="/pacientes"
+        ><button type="button" id="back-button">Atrás</button></a
+      >
+      <button id="modify-button">Modificar</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
