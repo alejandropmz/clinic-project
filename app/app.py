@@ -122,5 +122,57 @@ def detalle_cita(id):
     return render_template("appointment-detail.html", appointment=appointment[0])
 
 
+@app.route("/editar_cita/<int:id>")
+def editar_cita(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pacientes.contacto, pacientes.correo
+    FROM citas
+    JOIN pacientes
+    ON citas.paciente = pacientes.id
+    WHERE citas.id = %s
+    """,
+        (id,),
+    )
+    appointment = cursor.fetchall()
+    cursor.close()
+    print(appointment)
+    return render_template("edit-appointment.html", appointment=appointment[0])
+
+
+@app.route("/guardar_edicion_cita/<int:id>", methods=["POST"])
+def guardar_edicion_cita(id):
+    date = request.form["date"]
+    start = request.form["start"]
+    end = request.form["end"]
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    UPDATE citas
+    SET fecha = %s,
+    ingreso = %s,
+    salida = %s
+    WHERE id = %s
+    """,
+        (date, start, end, id),
+    )
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for("detalle_cita", id=id))
+
+""" 
+ UPDATE pacientes
+    SET identificacion = %s,
+    nombres = %s,
+    apellidos = %s,
+    nacimiento = %s,
+    contacto = %s,
+    correo = %s,
+    direccion = %s
+    WHERE id = %s
+ """
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=4000)

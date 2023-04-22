@@ -1,0 +1,91 @@
+{% extends "layout.html" %} {% block body %}
+
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
+  <div class="col-sm-12 col-md-6">
+    <i class="bx bx-detail"></i>
+    <div class="detail">
+      <h4>Modificar cita</h4>
+    </div>
+  </div>
+</div>
+
+<!-- Render information -->
+
+<div class="detail-info-container">
+  <h3>{{appointment[7].title()}} {{appointment[8].title()}}</h3>
+
+  <form
+    action="/guardar_edicion_cita/{{appointment[0]}}"
+    method="POST"
+    class="d-flex flex-column"
+  >
+    <label for="patient">
+      <div>
+        <span>Paciente</span>
+        <input
+          value="{{appointment[7].title()}} {{appointment[8].title()}}"
+          readonly
+          type="text"
+          name="patient"
+        />
+      </div>
+    </label>
+    <label for="date">
+      <div>
+        <span>Fecha</span>
+        <input
+          value="{{appointment[1]}}"
+          placeholder="Fecha"
+          type="date"
+          name="date"
+        />
+      </div>
+    </label>
+    <label for="start">
+      <div>
+        <span>Ingreso</span>
+        <input
+          value="{{appointment[2]}}"
+          placeholder="Ingreso"
+          type="time"
+          name="start"
+        />
+      </div>
+    </label>
+    <label for="end">
+      <div>
+        <span>Salida</span>
+        <input
+          value="{{appointment[3]}}"
+          placeholder="Fecha de nacimiento"
+          type="time"
+          name="end"
+        />
+      </div>
+    </label>
+    <label for="reason">
+      <div>
+        <span>Contacto</span>
+        <input value="{{appointment[9]}}" readonly type="text" name="reason" />
+      </div>
+    </label>
+    <label for="email">
+      <div>
+        <span>Correo</span>
+        <input value="{{appointment[10]}}" readonly type="email" name="email" />
+      </div>
+    </label>
+    <!-- buttons -->
+    <div class="d-flex justify-content-center detail-info-container-buttons">
+      <a href="/"><button type="button" id="back-button">Cancelar</button></a>
+      <button type="submit" id="save-button">Modificar</button>
+    </div>
+    <div>
+      <button id="delete-button">Eliminar usuario</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
