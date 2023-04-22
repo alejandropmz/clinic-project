@@ -83,6 +83,31 @@ def guardar_edicion_paciente(id):
     return redirect(url_for("detalle_paciente", id=id))
 
 
+@app.route("/crear_paciente", methods=["GET", "POST"])
+def crear_paciente():
+    if request.method == "GET":
+        return render_template("create-patient.html")
+    ident = request.form["id"]
+    first_names = request.form["first-names"]
+    last_names = request.form["last-names"]
+    birth_date = request.form["birth-date"]
+    contact = request.form["contact"]
+    email = request.form["email"]
+    address = request.form["address"]
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    INSERT INTO pacientes
+    (identificacion, nombres, apellidos, nacimiento, contacto, correo, direccion)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """,
+        (ident, first_names, last_names, birth_date, contact, email, address),
+    )
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for("pacientes"))
+
+
 """ citas """
 
 
@@ -160,6 +185,7 @@ def guardar_edicion_cita(id):
     mysql.connection.commit()
     cursor.close()
     return redirect(url_for("detalle_cita", id=id))
+
 
 """ 
  UPDATE pacientes
