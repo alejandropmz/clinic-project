@@ -171,33 +171,53 @@ def guardar_edicion_cita(id):
     date = request.form["date"]
     start = request.form["start"]
     end = request.form["end"]
+    reason = request.form["reason"]
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
     UPDATE citas
     SET fecha = %s,
     ingreso = %s,
-    salida = %s
+    salida = %s,
+    razon = %s
     WHERE id = %s
     """,
-        (date, start, end, id),
+        (date, start, end, reason, id),
     )
     mysql.connection.commit()
     cursor.close()
     return redirect(url_for("detalle_cita", id=id))
 
 
-""" 
- UPDATE pacientes
-    SET identificacion = %s,
-    nombres = %s,
-    apellidos = %s,
-    nacimiento = %s,
-    contacto = %s,
-    correo = %s,
-    direccion = %s
-    WHERE id = %s
- """
+@app.route("/crear_cita", methods=["GET", "POST"])
+def crear_cita():
+    if request.method == "GET":
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM pacientes")
+        patients = cursor.fetchall()
+        cursor.close()
+        return render_template("create-appointment.html", patients=patients)
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM pacientes")
+    patient = cursor.fetchall()
+    cursor.close()
+    date = request.form["date"]
+    start = request.form["start"]
+    end = request.form["end"]
+    reason = request.form["reason"]
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    INSERT INTO citas
+    (fecha, ingreso, salida, razon, paciente, estado)
+    VALUES (%s, %s, %s, %s, %s, %s)
+    """,
+        (date, start, end, reason, patient[0][0], 1),
+    )
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for("citas"))
 
 
 if __name__ == "__main__":

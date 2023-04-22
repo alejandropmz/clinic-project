@@ -67,8 +67,14 @@
     </label>
     <label for="reason">
       <div>
+        <span>Razón</span>
+        <input value="{{appointment[5]}}" type="text" name="reason" />
+      </div>
+    </label>
+    <label for="contact">
+      <div>
         <span>Contacto</span>
-        <input value="{{appointment[9]}}" readonly type="text" name="reason" />
+        <input value="{{appointment[9]}}" readonly type="text" name="contact" />
       </div>
     </label>
     <label for="email">
@@ -83,7 +89,7 @@
       <button type="submit" id="save-button">Modificar</button>
     </div>
     <div>
-      <button id="delete-button">Eliminar usuario</button>
+      <button id="delete-button">Cancelar cita</button>
     </div>
   </form>
 </div>

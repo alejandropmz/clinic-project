@@ -128,7 +128,6 @@
   transition: all ease-in 0.3s;
 }
 
-
 .options-buttons button {
   border: none;
   border-radius: 2px;
@@ -164,7 +163,6 @@
   border: solid blue 2px;
 } */
 
-
 .detail-info-container form label div {
   margin: auto;
   width: 400px;
@@ -188,7 +186,6 @@
 .detail-info-container-buttons button {
   margin: 10px 2px;
 }
-
 
 #back-button {
   border: none;
@@ -228,7 +225,6 @@
   transition: all ease-in 0.3s;
 }
 
-
 #delete-button {
   border: none;
   padding: 5px 10px;
@@ -240,6 +236,14 @@
 #delete-button:hover {
   background: var(--delete-red-hover);
   transition: all ease-in 0.3s;
+}
+
+/* Select */
+
+select {
+  width: 70%;
+  border: none;
+  text-align: center;
 }
 
 

@@ -1,0 +1,67 @@
+{% extends "layout.html" %} {% block body %}
+
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
+  <div class="col-sm-12 col-md-6">
+    <i class="bx bx-calendar-edit"></i>
+    <div class="detail">
+      <h4>Agendar cita</h4>
+    </div>
+  </div>
+</div>
+
+<!-- Render information -->
+
+<div class="detail-info-container">
+  <h3>Agender cita</h3>
+
+  <form action="/crear_cita" method="POST" class="d-flex flex-column">
+    <label for="patient">
+      <div>
+        <span>Paciente</span>
+        <select name="patient">
+          <option disabled selected>Seleccione el paciente</option>
+          {% if patients %} {% for patient in patients %}
+          <option value="{{patient[0]}}">
+            {{patient[2].title()}} {{patient[3].title()}}
+          </option>
+          {% endfor %} {% endif %}
+        </select>
+      </div>
+    </label>
+    <label for="date">
+      <div>
+        <span>Fecha</span>
+        <input placeholder="Fecha" type="date" name="date" />
+      </div>
+    </label>
+    <label for="start">
+      <div>
+        <span>Ingreso</span>
+        <input placeholder="Ingreso" type="time" name="start" />
+      </div>
+    </label>
+    <label for="end">
+      <div>
+        <span>Salida</span>
+        <input placeholder="Fecha de nacimiento" type="time" name="end" />
+      </div>
+    </label>
+    <label for="reason">
+      <div>
+        <span>Razón</span>
+        <input type="text" name="reason" />
+      </div>
+    </label>
+    <!-- buttons -->
+    <div class="d-flex justify-content-center detail-info-container-buttons">
+      <a href="/citas"
+        ><button type="button" id="back-button">Cancelar</button></a
+      >
+      <button type="submit" id="save-button">Agendar</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
