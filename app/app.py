@@ -29,7 +29,6 @@ def pacientes():
     cursor.execute("SELECT * FROM citas")
     appointments = cursor.fetchall()
     cursor.close()
-    print(appointments)
     return render_template(
         "patients.html", patients=patients, appointments=appointments
     )
@@ -50,7 +49,6 @@ def editar_paciente(id):
     cursor.execute("SELECT * FROM pacientes WHERE id = %s", (id,))
     patient = cursor.fetchall()
     cursor.close()
-    print(patient)
     return render_template("edit-patient.html", patient=patient[0])
 
 
@@ -154,7 +152,6 @@ def detalle_cita(id):
     )
     appointment = cursor.fetchall()
     cursor.close()
-    print(appointment)
     return render_template("appointment-detail.html", appointment=appointment[0])
 
 
@@ -173,7 +170,6 @@ def editar_cita(id):
     )
     appointment = cursor.fetchall()
     cursor.close()
-    print(appointment)
     return render_template("edit-appointment.html", appointment=appointment[0])
 
 
@@ -226,6 +222,21 @@ def crear_cita():
     VALUES (%s, %s, %s, %s, %s, %s)
     """,
         (date, start, end, reason, patient, 1),
+    )
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for("citas"))
+
+
+@app.route("/eliminar_cita/<int:id>")
+def eliminar_cita(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "UPDATE citas SET estado = %s WHERE id = %s",
+        (
+            2,
+            id,
+        ),
     )
     mysql.connection.commit()
     cursor.close()

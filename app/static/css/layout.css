@@ -12,6 +12,8 @@
   --light-gray-hover: #d5d2d2;
   --delete-red: #c42424;
   --delete-red-hover: #a81212;
+  --approve-green: #04ad04;
+  --cancel-red: #f03a3a;
 }
 
 * {

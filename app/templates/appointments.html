@@ -80,7 +80,11 @@
       <td>{{appointment[3]}}</td>
       <td>{{appointment[7].title()}} {{appointment[8].title()}}</td>
       <td>{{appointment[5].title()}}</td>
-      <td>APROBADA</td>
+      {% if appointment[6] == 1 %}
+      <td><div id="approve">Aprobada</div></td>
+      {% else %}
+      <td><div id="cancel">Cancelada</div></td>
+      {% endif %}
       <td>
         <div class="options-buttons">
           <a href="/citas/{{appointment[0]}}"

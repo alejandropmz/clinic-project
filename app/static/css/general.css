@@ -119,8 +119,27 @@
 
 #forms table:first-child th {
   background: #f4f1f1;
-
   padding: 5px 0;
+}
+
+/* aprove, cancel appointments */
+
+#approve {
+  margin: auto;
+  border-radius: 4px;
+  background: var(--approve-green);
+  color: white;
+  padding: 5px 10px;
+  width: 60%;
+}
+
+#cancel {
+  margin: auto;
+  border-radius: 4px;
+  background: var(--cancel-red);
+  color: white;
+  padding: 5px 10px;
+  width: 60%;
 }
 
 #dropdownMenuButton1 {

@@ -85,11 +85,15 @@
     </label>
     <!-- buttons -->
     <div class="d-flex justify-content-center detail-info-container-buttons">
-      <a href="/citas/{{appointment[0]}}"><button type="button" id="back-button">Cancelar</button></a>
+      <a href="/citas/{{appointment[0]}}"
+        ><button type="button" id="back-button">Cancelar</button></a
+      >
       <button type="submit" id="save-button">Modificar</button>
     </div>
     <div>
-      <button id="delete-button">Cancelar cita</button>
+      <a href="/eliminar_cita/{{appointment[0]}}"
+        ><button type="button" id="delete-button">Cancelar cita</button></a
+      >
     </div>
   </form>
 </div>
