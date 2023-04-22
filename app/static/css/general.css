@@ -248,7 +248,8 @@
   transition: all ease-in 0.3s;
 }
 
-#delete-button {
+#delete-button,
+#cancel-button {
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -256,7 +257,8 @@
   color: white;
 }
 
-#delete-button:hover {
+#delete-button:hover,
+#cancel-button:hover {
   background: var(--delete-red-hover);
   transition: all ease-in 0.3s;
 }

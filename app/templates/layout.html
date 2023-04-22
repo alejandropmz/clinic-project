@@ -99,6 +99,8 @@
       </div>
     </div>
 
+    {% block body %} {% endblock %}
+
     <!-- Bootstrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -111,6 +113,6 @@
       crossorigin="anonymous"
     ></script>
 
-    {% block body %} {% endblock %}
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
   </body>
 </html>
