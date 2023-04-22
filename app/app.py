@@ -35,5 +35,25 @@ def pacientes():
     )
 
 
+""" citas """
+
+
+@app.route("/citas")
+def citas():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos
+    FROM citas
+    JOIN pacientes
+    ON citas.paciente = pacientes.id
+    
+    """
+    )
+    all_data = cursor.fetchall()
+    cursor.close()
+    return render_template("appointments.html", appointments=all_data)
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=4000)

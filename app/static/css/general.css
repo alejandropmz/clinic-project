@@ -150,6 +150,7 @@
 }
 
 .dropdown .show li {
+  text-align: center;
   margin: 0 auto;
   padding: 0;
 }
@@ -192,6 +193,5 @@
 
   .dropdown {
     display: block;
-    border: solid red 2px;
   }
 }

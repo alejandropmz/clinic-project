@@ -71,13 +71,10 @@
             Consultas
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            {% if appointments %}
-              {% for appointment in appointments %}
-                {% if appointment[4] in patient %}
-                <li><a class="dropdown-item" href="#">{{appointment[5]}}</a></li>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
+            {% if appointments %} {% for appointment in appointments %} {% if
+            appointment[4] in patient %}
+            <li><a class="dropdown-item" href="#">{{appointment[5]}}</a></li>
+            {% endif %} {% endfor %} {% endif %}
           </ul>
         </div>
       </td>
@@ -95,8 +92,8 @@
       </td>
       {% endfor %} {% else %}
       <h2>no patients</h2>
-      {% endif %}
     </tr>
+    {% endif %}
   </table>
 </div>
 
