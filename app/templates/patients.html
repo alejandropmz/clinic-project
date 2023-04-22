@@ -36,15 +36,16 @@
 
 <!-- render data information -->
 
-<form id="forms" action="">
+<div id="forms" class="f-flex justify-content-center">
   <table>
     <tr>
-      <th>Foto</th>
+      <th id="photo">Foto</th>
       <th>Nombre</th>
       <th>Nacimiento</th>
       <th>Consultas</th>
       <th>Acciones</th>
     </tr>
+    {% if patients %} {% for patient in patients %}
     <tr>
       <td>
         <img
@@ -53,19 +54,50 @@
           alt=""
         />
       </td>
-      <td>nombre</td>
-      <td>Nacimeinto</td>
-      <td>Consultas</td>
+      <td>{{patient[2].title()}} {{patient[3].title()}}</td>
+      <td>
+        {{patient[4].split("-")[2]}}/{{patient[4].split("-")[1]}}/{{patient[4].split("-")[0]}}
+      </td>
+      <td>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-calendar-event"></i>
+            Consultas
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {% if appointments %}
+              {% for appointment in appointments %}
+                {% if appointment[4] in patient %}
+                <li><a class="dropdown-item" href="#">{{appointment[5]}}</a></li>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+      </td>
       <td>
         <div class="options-buttons">
           <button>
             <i class="bi bi-eye"></i>
             Ver
           </button>
+          <button>
+            <i class="bi bi-pencil-square"></i>
+            Modificar
+          </button>
         </div>
       </td>
+      {% endfor %} {% else %}
+      <h2>no patients</h2>
+      {% endif %}
     </tr>
   </table>
-</form>
+</div>
 
 {% endblock %}

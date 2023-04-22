@@ -78,6 +78,92 @@
   align-items: center;
 }
 
+/* Forms */
+
+#forms {
+  margin: 0 20px;
+}
+
+#forms table {
+  margin: auto;
+  width: 100%;
+  table-layout: fixed;
+}
+
+#forms table tr #photo {
+  width: 5%;
+}
+
+#forms table tr * {
+  text-align: center;
+}
+
+#forms table tr td,
+#forms table th {
+  margin: auto;
+  border: var(--gray-borders) solid 1px;
+}
+
+#forms table tr td {
+  padding: 4px 0;
+}
+
+#form-photo {
+  width: 35px;
+  border-radius: 100%;
+}
+
+#forms table:first-child th {
+  background: #f4f1f1;
+
+  padding: 5px 0;
+}
+
+#dropdownMenuButton1 {
+  background: var(--buttons-blue);
+}
+
+#dropdownMenuButton1:hover {
+  background: var(--buttons-blue-hover);
+  transition: all ease-in 0.3s;
+}
+
+#dropdownMenuButton1:focus-visible {
+  outline: none;
+}
+
+.options-buttons button {
+  border: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+  background: var(--buttons-blue);
+  color: white;
+}
+
+.options-buttons button:hover {
+  background: var(--buttons-blue-hover);
+  transition: all ease-in 0.3s;
+}
+
+.dropdown .show {
+  outline: none;
+}
+
+.dropdown .show li {
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
 /* media querys */
 
 @media screen and (min-width: 768px) {
@@ -92,49 +178,20 @@
   }
 }
 
-/* Forms */
+@media screen and (max-width: 786px) {
+  /* forms elements */
 
-#forms {
-  border: solid 1px var(--gray-borders);
-}
+  #form table tr {
+    margin: 0;
+    display: block;
+  }
 
-#forms table {
-  margin: auto;
-  width: 100%;
-}
+  #forms table tr #photo {
+    width: auto;
+  }
 
-#forms table tr * {
-  text-align: center;
-}
-
-#forms table tr td {
-  padding: 4px 0;
-}
-
-#form-photo {
-  width: 40px;
-  border-radius: 100%;
-}
-
-#forms table:first-child th {
-  background: #f4f1f1;
-
-  padding: 5px 0;
-}
-
-#forms table:nth-child(2) td {
-  border: orange solid 2px;
-}
-
-.options-buttons button {
-  border: none;
-  border-radius: 2px;
-  padding: 5px 10px;
-  background: var(--buttons-blue);
-  color: white;
-}
-
-.options-buttons button:hover {
-  background: var(--buttons-blue-hover);
-  transition: all ease-in 0.3s;
+  .dropdown {
+    display: block;
+    border: solid red 2px;
+  }
 }
