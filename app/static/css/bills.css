@@ -80,6 +80,35 @@
   margin: 0;
 }
 
+#description-container {
+  padding: 0;
+}
+
+#description-container table tr th {
+  width: 100%;
+}
+
+#description-container table tr #price {
+  min-width: 300px;
+}
+
+.description-title * {
+  background: var(--light-gray);
+}
+
+#description-container table tr * {
+  border: solid var(--light-gray) 1px;
+  text-align: center;
+}
+
+#description-inputs * {
+  text-align: start;
+  border: red solid 2px;
+  width: 100%;
+  outline: none;
+}
+
+
 #bill-footer {
   /* eliminar luego */
   margin: 20px 0 0;
