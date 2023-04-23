@@ -26,6 +26,7 @@
   <div
     class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center calendar"
   >
+    {% if appointment%}
     <div class="dropdown">
       <button
         class="btn btn-secondary dropdown-toggle"
@@ -42,6 +43,7 @@
         <li><a class="dropdown-item" href="#">24/04</a></li>
       </ul>
     </div>
+    {% else %} {% endif %}
   </div>
   <div class="col-sm-12 col-md-4 pagination">
     <nav aria-label="Page navigation example">
@@ -57,6 +59,7 @@
 <!-- render appointment information -->
 
 <div id="forms" class="f-flex justify-content-center">
+  {% if appointments %}
   <table>
     <tr>
       <th id="photo">No.</th>
@@ -68,7 +71,7 @@
       <th>Estado</th>
       <th>Acciones</th>
     </tr>
-    {% if appointments %} {% for appointment in appointments %}
+    {% for appointment in appointments %}
     <tr>
       <td>
         <p style="margin: 0">{{appointment[0]}}</p>
@@ -82,7 +85,10 @@
       <td>{{appointment[5].title()}}</td>
       {% if appointment[6] == 1 %}
       <td>
-        <div id="approve-dot" class="d-flex justify-content-center align-items-center">
+        <div
+          id="approve-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
           <i class="bi bi-dot"></i><span>Aprobada</span>
         </div>
       </td>
@@ -113,7 +119,15 @@
         </div>
       </td>
     </tr>
-    {% endfor %} {% endif %}
+    {% endfor %} {% else %}
+
+    <div
+      class="row container-fluid sub-nav d-flex justify-content-between"
+    ></div>
+    <div class="d-flex justify-content-center detail-info-container">
+      <h2>No tiene citas disponibles</h2>
+    </div>
+    {% endif %}
   </table>
 </div>
 

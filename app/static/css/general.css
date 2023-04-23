@@ -148,8 +148,6 @@
 }
 
 #cancel-dot {
-  border: solid var(--light-gray) 1px;
-  border-radius: 2px;
   width: 85%;
   margin: auto;
 }
@@ -160,8 +158,6 @@
 }
 
 #approve-dot {
-  border: solid var(--light-gray) 1px;
-  border-radius: 2px;
   width: 85%;
   margin: auto;
 }

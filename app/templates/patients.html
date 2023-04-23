@@ -39,6 +39,7 @@
 <!-- render data information -->
 
 <div id="forms" class="f-flex justify-content-center">
+  {% if patients %}
   <table>
     <tr>
       <th id="photo">Foto</th>
@@ -47,7 +48,7 @@
       <th>Consultas pendientes</th>
       <th>Acciones</th>
     </tr>
-    {% if patients %} {% for patient in patients %}
+    {% for patient in patients %}
     <tr>
       <td>
         <img
@@ -101,8 +102,14 @@
         </div>
       </td>
       {% endfor %} {% else %}
-      <h2>no patients</h2>
     </tr>
+
+    <div
+      class="row container-fluid sub-nav d-flex justify-content-between"
+    ></div>
+    <div class="d-flex justify-content-center detail-info-container">
+      <h2>No hay pacientes registrados</h2>
+    </div>
     {% endif %}
   </table>
 </div>
