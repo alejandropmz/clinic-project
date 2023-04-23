@@ -2,6 +2,7 @@
 
 .create-bill-container {
   border: var(--light-gray) solid 1px;
+  margin: 0 0 40px;
 }
 
 .create-bill-container #bill-header img {
@@ -103,7 +104,6 @@
 
 #description-inputs * {
   text-align: start;
-  border: red solid 2px;
   width: 100%;
   outline: none;
 }
@@ -146,8 +146,7 @@ margin: 20px 0;
 
 
 #bill-footer {
-  /* eliminar luego */
-  margin: 20px 0 0;
+  margin: 60px 0 0;
   padding: 5px 0;
   background: var(--light-gray);
   text-align: center;
@@ -156,4 +155,12 @@ margin: 20px 0;
 
 #bill-footer * {
   margin: 0;
+}
+
+#bill-buttons {
+  margin: 15px 0;
+}
+
+#bill-buttons * {
+  margin: 0 3px;
 }
