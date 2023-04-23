@@ -44,7 +44,7 @@
       <th id="photo">Foto</th>
       <th>Nombre</th>
       <th>Nacimiento</th>
-      <th>Consultas</th>
+      <th>Consultas pendientes</th>
       <th>Acciones</th>
     </tr>
     {% if patients %} {% for patient in patients %}
@@ -74,9 +74,13 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {% if appointments %} {% for appointment in appointments %} {% if
-            appointment[4] in patient %}
-            <li><a class="dropdown-item" href="/citas/{{appointment[0]}}">{{appointment[5]}}</a></li>
-            {% endif %} {% endfor %} {% endif %}
+            appointment[4] in patient %} {% if appointment[6] == 1 %}
+            <li>
+              <a class="dropdown-item" href="/citas/{{appointment[0]}}"
+                >{{appointment[5]}}</a
+              >
+            </li>
+            {% endif %} {% endif %} {% endfor %} {% endif %}
           </ul>
         </div>
       </td>

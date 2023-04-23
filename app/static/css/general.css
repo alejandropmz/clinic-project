@@ -122,6 +122,11 @@
   padding: 5px 0;
 }
 
+#appointment-input {
+  cursor: pointer;
+  background: var(--light-gray);
+}
+
 /* aprove, cancel appointments */
 
 #approve {
@@ -270,7 +275,6 @@ select {
   border: none;
   text-align: center;
 }
-
 
 /* media querys */
 

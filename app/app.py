@@ -29,6 +29,7 @@ def pacientes():
     cursor.execute("SELECT * FROM citas")
     appointments = cursor.fetchall()
     cursor.close()
+    print(appointments)
     return render_template(
         "patients.html", patients=patients, appointments=appointments
     )
@@ -241,6 +242,25 @@ def eliminar_cita(id):
     mysql.connection.commit()
     cursor.close()
     return redirect(url_for("citas"))
+
+
+@app.route("/paciente_citas/<int:paciente_id>")
+def paciente_citas(paciente_id):
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pacientes.contacto, pacientes.correo
+    FROM citas
+    JOIN pacientes
+    ON citas.paciente = pacientes.id
+    WHERE citas.paciente = %s
+    """,
+        (paciente_id,),
+    )
+    all_data = cursor.fetchall()
+    cursor.close()
+    print(all_data)
+    return render_template("patient-appointment-list.html", data=all_data)
 
 
 if __name__ == "__main__":
