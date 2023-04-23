@@ -103,11 +103,44 @@
           <th id="price">Costo</th>
         </tr>
         <tr id="description-inputs">
-          <td><input type="text" placeholder="Descripción de consulta"></td>
-          <td><input type="text" placeholder="Monto cobrado"></td>
+          <td><input type="text" placeholder="Descripción de consulta" /></td>
+          <td><input type="text" placeholder="Monto cobrado" /></td>
         </tr>
       </table>
     </form>
+  </div>
+
+  <!-- mount in lyric and number -->
+
+  <div class="row" id="total-amount">
+    <!-- in lyrics -->
+    <div class="col-sm-12 col-md-9" id="lyric-amount">
+      <div id="lyric">
+        <p><strong>Valor en letras</strong></p>
+        <p id="margin">Doscientos ochenta mil pesos</p>
+      </div>
+      <div id="observations">
+        <p><strong>Observaciones</strong></p>
+        <p id="margin">Se genera pago a través de tarjeta de crédito</p>
+      </div>
+    </div>
+    <!-- in numbers -->
+    <div class="col-sm-12 col-md-3" id="number-amount">
+      <table id="price-table">
+        <tr>
+          <th><small>Total bruto</small></th>
+          <td><small>200.000</small></td>
+        </tr>
+        <tr>
+          <th><small>IVA 19%</small></th>
+          <td>8.000</td>
+        </tr>
+        <tr>
+          <th><small>Total a pagar</small></th>
+          <td>138.000</td>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <!-- footer -->

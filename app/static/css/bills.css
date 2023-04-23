@@ -108,6 +108,42 @@
   outline: none;
 }
 
+#total-amount {
+margin: 20px 0;
+}
+
+#total-amount div p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+#total-amount div #margin {
+  margin-left: 20px;
+}
+
+
+#number-amount {
+  padding: 0;
+}
+
+#number-amount table {
+  width: 100%;
+  text-align: center;
+}
+
+#number-amount * {
+  width: 100%;
+}
+
+#price-table tr,
+#price-table td {
+  border: solid 1px var(--light-gray);
+}
+
+#price-table tr th {
+  width: 30%;
+}
+
 
 #bill-footer {
   /* eliminar luego */
