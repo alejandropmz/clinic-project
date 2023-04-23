@@ -104,7 +104,9 @@
         </tr>
         <tr id="description-inputs">
           <td><input type="text" placeholder="Descripción de consulta" /></td>
-          <td><input type="text" placeholder="Monto cobrado" /></td>
+          <td>
+            <input id="cost-input" type="text" placeholder="Monto cobrado" />
+          </td>
         </tr>
       </table>
     </form>
@@ -129,15 +131,15 @@
       <table id="price-table">
         <tr>
           <th><small>Total bruto</small></th>
-          <td><small>200.000</small></td>
+          <td><input readonly id="cost-output" type="text" /></td>
         </tr>
         <tr>
           <th><small>IVA 19%</small></th>
-          <td>8.000</td>
+          <td><input readonly id="const-iva-output" type="text" /></td>
         </tr>
         <tr>
           <th><small>Total a pagar</small></th>
-          <td>138.000</td>
+          <td><input readonly id="total-cost" type="text"></td>
         </tr>
       </table>
     </div>

@@ -109,7 +109,7 @@
 }
 
 #total-amount {
-margin: 20px 0;
+  margin: 20px 0;
 }
 
 #total-amount div p {
@@ -120,7 +120,6 @@ margin: 20px 0;
 #total-amount div #margin {
   margin-left: 20px;
 }
-
 
 #number-amount {
   padding: 0;
@@ -135,8 +134,7 @@ margin: 20px 0;
   width: 100%;
 }
 
-#price-table tr,
-#price-table td {
+#price-table tr {
   border: solid 1px var(--light-gray);
 }
 
@@ -144,6 +142,10 @@ margin: 20px 0;
   width: 30%;
 }
 
+#price-table tr td input {
+  border: none;
+  text-align: center;
+}
 
 #bill-footer {
   margin: 60px 0 0;
