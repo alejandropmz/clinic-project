@@ -1,0 +1,50 @@
+/* create bill */
+
+.create-bill-container {
+  border: var(--light-gray) solid 1px;
+}
+
+.create-bill-container #bill-header img {
+  width: 200px;
+}
+
+#info * {
+  margin: 0;
+  text-align: center;
+}
+
+#bill-number {
+  border: solid 1px var(--light-gray);
+  margin: auto;
+  width: 400px;
+  height: 100px;
+  text-align: center;
+}
+
+#bill-number * {
+  margin: 0;
+}
+
+
+#client-info {
+  border: solid red 2px;
+}
+
+#bill-info {
+  border: solid 2px blue;
+}
+
+
+
+#bill-footer {
+  /* eliminar luego */
+  margin: 20px 0 0;
+  padding: 5px 20px;
+  background: var(--light-gray);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+#bill-footer * {
+  margin: 0;
+}

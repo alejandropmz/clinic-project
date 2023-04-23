@@ -202,7 +202,8 @@
 /* detail info container */
 
 .detail-info-container {
-  border: solid var(--light-gray) 1px;
+  border: solid var(--light-gray);
+  border-width: 1px 0 1px;
   padding: 20px 0;
   text-align: center;
 }

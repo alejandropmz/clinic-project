@@ -1,0 +1,63 @@
+{% extends "layout.html" %} {% block body %}
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
+  <div class="col-sm-12 col-md-6">
+    <i class="bi bi-plus-circle"></i>
+    <div class="detail">
+      <h4>Añadir factura</h4>
+    </div>
+  </div>
+</div>
+
+<!-- add information -->
+
+<div class="container-fluid create-bill-container">
+  <!-- header -->
+  <div class="row" id="bill-header">
+    <div class="col-sm-12 col-md-4 d-flex justify-content-center" id="logo">
+      <img src="../static/css/images/clinic-logo.jpg" alt="" />
+    </div>
+    <div
+      class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
+      id="info"
+    >
+      <strong><small>Clinic project center</small></strong>
+      <small>NIT X. XXX-XXX-XXX</small>
+      <small>Cl 12 N XX - XXX</small>
+      <small>Tel: 3256985</small>
+      <small>Bogotá - Colombia</small>
+      <small>algunaempresa@gmail.com</small>
+    </div>
+    <div
+      class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
+      id="bill-number"
+    >
+      <h4><strong>Factura no.</strong></h4>
+      <h5>1</h5>
+    </div>
+  </div>
+
+  <!-- client info -->
+  <!-- work with forms, javascript and ajax's query  -->
+  <div class="row" id="client-bill-info">
+    <div class="col-sm-12 col-md-7" id="client-info">client info</div>
+    <div class="col-sm-12 col-md-5" id="bill-info">bill info</div>
+  </div>
+
+  <div class="container-fluid" id="bill-footer">
+    <small
+      ><p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae ea ipsam
+        ex. Illo dolore, sapiente quibusdam, perferendis a deserunt, dolorem
+        expedita necessitatibus molestias praesentium possimus architecto.
+        Cumque, dolor quas. Saepe Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit. Facere quasi corrupti ullam assumenda consequuntur
+        deserunt accusamus consequatur rerum ducimus aperiam corporis, quae
+        maxime laboriosam autem enim numquam velit voluptate sequi!
+      </p></small
+    >
+  </div>
+</div>
+
+{% endblock %}

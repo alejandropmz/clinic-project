@@ -263,5 +263,17 @@ def paciente_citas(paciente_id):
     return render_template("patient-appointment-list.html", data=all_data)
 
 
+
+""" Facturas """
+
+@app.route("/facturas")
+def facturas():
+    return render_template("bills.html")
+
+@app.route("/crear_factura")
+def crear_factura():
+    return render_template("create-bill.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=4000)
