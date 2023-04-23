@@ -1,7 +1,7 @@
 {% extends "layout.html" %} {% block body %}
 <!-- sub-nav -->
 
-<div class="row container-fluid sub-nav d-flex justify-content-between">
+<div class="row container sub-nav d-flex justify-content-between">
   <div class="col-sm-12 col-md-6">
     <i class="bi bi-plus-circle"></i>
     <div class="detail">
@@ -12,7 +12,7 @@
 
 <!-- add information -->
 
-<div class="container-fluid create-bill-container">
+<div class="container create-bill-container">
   <!-- header -->
   <div class="row" id="bill-header">
     <div class="col-sm-12 col-md-4 d-flex justify-content-center" id="logo">
@@ -22,12 +22,12 @@
       class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
       id="info"
     >
-      <strong><small>Clinic project center</small></strong>
-      <small>NIT X. XXX-XXX-XXX</small>
-      <small>Cl 12 N XX - XXX</small>
-      <small>Tel: 3256985</small>
-      <small>Bogotá - Colombia</small>
-      <small>algunaempresa@gmail.com</small>
+      <strong><div>Clinic project center</div></strong>
+      <div>NIT X. XXX-XXX-XXX</div>
+      <div>Cl 12 N XX - XXX</div>
+      <div>Tel: 3256985</div>
+      <div>Bogotá - Colombia</div>
+      <div>algunaempresa@gmail.com</div>
     </div>
     <div
       class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
@@ -41,13 +41,48 @@
   <!-- client info -->
   <!-- work with forms, javascript and ajax's query  -->
   <div class="row" id="client-bill-info">
-    <div class="col-sm-12 col-md-7" id="client-info">client info</div>
+    <div class="col-sm-12 col-md-7" id="client-info">
+      <form class="d-flex flex-column" action="">
+        <label for="">
+          <div class="d-flex">
+            <div id="name-title" class="title">
+              <small><p>Nombres</p></small>
+            </div>
+            <input type="text" />
+          </div>
+        </label>
+        <label for="">
+          <div class="d-flex">
+            <div class="title">
+              <small><p>Cedula</p></small>
+            </div>
+            <input type="text" />
+            <div class="title">
+              <small><p>Teléfono</p></small>
+            </div>
+            <input type="text" />
+          </div>
+        </label>
+        <label for="">
+          <div class="d-flex">
+            <div class="title">
+              <small><p>Dirección</p></small>
+            </div>
+            <input type="text" />
+            <div class="title">
+              <small><p>Ciudad</p></small>
+            </div>
+            <input type="text" />
+          </div>
+        </label>
+      </form>
+    </div>
     <div class="col-sm-12 col-md-5" id="bill-info">bill info</div>
   </div>
 
-  <div class="container-fluid" id="bill-footer">
-    <small
-      ><p>
+  <div class="container" id="bill-footer">
+    <div>
+      <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae ea ipsam
         ex. Illo dolore, sapiente quibusdam, perferendis a deserunt, dolorem
         expedita necessitatibus molestias praesentium possimus architecto.
@@ -55,8 +90,8 @@
         adipisicing elit. Facere quasi corrupti ullam assumenda consequuntur
         deserunt accusamus consequatur rerum ducimus aperiam corporis, quae
         maxime laboriosam autem enim numquam velit voluptate sequi!
-      </p></small
-    >
+      </p>
+    </div>
   </div>
 </div>
 
