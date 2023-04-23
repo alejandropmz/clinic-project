@@ -81,9 +81,20 @@
       <td>{{appointment[7].title()}} {{appointment[8].title()}}</td>
       <td>{{appointment[5].title()}}</td>
       {% if appointment[6] == 1 %}
-      <td><div id="approve">Aprobada</div></td>
+      <td>
+        <div id="approve-dot" class="d-flex justify-content-center align-items-center">
+          <i class="bi bi-dot"></i><span>Aprobada</span>
+        </div>
+      </td>
       {% else %}
-      <td><div id="cancel">Cancelada</div></td>
+      <td>
+        <div
+          id="cancel-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Cancelada</span>
+        </div>
+      </td>
       {% endif %}
       <td>
         <div class="options-buttons">

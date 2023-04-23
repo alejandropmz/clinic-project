@@ -81,7 +81,7 @@
 /* Forms */
 
 #forms {
-  margin: 0 20px;
+  margin: 0 20px 20px;
 }
 
 #forms table {
@@ -145,6 +145,30 @@
   color: white;
   padding: 5px 10px;
   width: 60%;
+}
+
+#cancel-dot {
+  border: solid var(--light-gray) 1px;
+  border-radius: 2px;
+  width: 85%;
+  margin: auto;
+}
+
+#cancel-dot i {
+  font-size: 1.6rem;
+  color: var(--cancel-red);
+}
+
+#approve-dot {
+  border: solid var(--light-gray) 1px;
+  border-radius: 2px;
+  width: 85%;
+  margin: auto;
+}
+
+#approve-dot i {
+  font-size: 1.6rem;
+  color: var(--green-buttons);
 }
 
 #dropdownMenuButton1 {
