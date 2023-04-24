@@ -22,12 +22,24 @@
       class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
       id="info"
     >
-      <strong><div>Clinic project center</div></strong>
-      <div>NIT X. XXX-XXX-XXX</div>
-      <div>Cl 12 N XX - XXX</div>
-      <div>Tel: 3256985</div>
-      <div>Bogotá - Colombia</div>
-      <div>algunaempresa@gmail.com</div>
+      <strong
+        ><small><p>Clinic project center</p></small></strong
+      >
+      <strong
+        ><small><p>NIT X. XXX-XXX-XXX</p></small></strong
+      >
+      <strong>
+        <small><p>Cl 12 N XX - XXX</p></small>
+      </strong>
+      <strong
+        ><small><p>Tel: 3256985</p></small></strong
+      >
+      <strong
+        ><small><p>Bogotá - Colombia</p></small></strong
+      >
+      <strong
+        ><small><p>algunaempresa@gmail.com</p></small></strong
+      >
     </div>
     <div
       class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
@@ -43,13 +55,13 @@
   <div class="row" id="client-bill-info">
     <div class="col-sm-12 col-md-7" id="client-info">
       <!-- patient info form -->
-      <form class="d-flex flex-column" action="">
+      <form id="data-client-form" class="d-flex flex-column" action="">
         <label for="">
           <div class="d-flex">
             <div id="name-title" class="title">
               <small><p>Nombres</p></small>
             </div>
-            <input type="text" />
+            <input type="text" name="client-names" />
           </div>
         </label>
         <label for="">
@@ -57,11 +69,11 @@
             <div class="title">
               <small><p>Cedula</p></small>
             </div>
-            <input type="text" />
+            <input type="text" name="client-id" />
             <div class="title">
               <small><p>Teléfono</p></small>
             </div>
-            <input type="text" />
+            <input type="text" name="client-contact" />
           </div>
         </label>
         <label for="">
@@ -69,11 +81,11 @@
             <div class="title">
               <small><p>Dirección</p></small>
             </div>
-            <input type="text" />
+            <input type="text" name="client-address" />
             <div class="title">
               <small><p>Ciudad</p></small>
             </div>
-            <input type="text" />
+            <input type="text" name="client-city" />
           </div>
         </label>
       </form>
@@ -96,16 +108,27 @@
   <!-- description -->
 
   <div id="description-container" class="container">
-    <form action="">
+    <form id="prices-form" action="">
       <table class="row">
         <tr class="description-title">
           <th>Descripción</th>
           <th id="price">Costo</th>
         </tr>
         <tr id="description-inputs">
-          <td><input type="text" placeholder="Descripción de consulta" /></td>
           <td>
-            <input id="cost-input" type="text" placeholder="Monto cobrado" />
+            <input
+              name="appointment-description"
+              type="text"
+              placeholder="Descripción de consulta"
+            />
+          </td>
+          <td>
+            <input
+              name="appointment-cost"
+              id="cost-input"
+              type="text"
+              placeholder="Monto cobrado"
+            />
           </td>
         </tr>
       </table>
@@ -139,7 +162,7 @@
         </tr>
         <tr>
           <th><small>Total a pagar</small></th>
-          <td><input readonly id="total-cost" type="text"></td>
+          <td><input readonly id="total-cost" type="text" /></td>
         </tr>
       </table>
     </div>
@@ -164,7 +187,7 @@
 
 <!-- buttons -->
 <div class="d-flex justify-content-center" id="bill-buttons">
-  <button id="cancel-button">Cancelar</button>
-  <button id="save-button">Generar factura</button>
+  <button id="cancel-form-button">Cancelar</button>
+  <button type="button" id="send-bill-button">Generar factura</button>
 </div>
 {% endblock %}

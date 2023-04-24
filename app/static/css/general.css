@@ -257,7 +257,8 @@
   transition: all ease-in 0.3s;
 }
 
-#save-button {
+#save-button,
+#send-bill-button {
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -265,13 +266,15 @@
   color: white;
 }
 
-#save-button:hover {
+#save-button:hover,
+#send-bill-button:hover {
   background: var(--green-buttons-hover);
   transition: all ease-in 0.3s;
 }
 
 #delete-button,
-#cancel-button {
+#cancel-button,
+#cancel-form-button {
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -280,7 +283,8 @@
 }
 
 #delete-button:hover,
-#cancel-button:hover {
+#cancel-button:hover,
+#cancel-form-button:hover {
   background: var(--delete-red-hover);
   transition: all ease-in 0.3s;
 }

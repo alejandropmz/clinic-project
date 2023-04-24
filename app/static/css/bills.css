@@ -61,6 +61,7 @@
 
 #client-info form label div input {
   border: solid 1px var(--light-gray);
+  padding-left: 3px;
   width: 100%;
   outline: none;
 }
@@ -95,6 +96,10 @@
 
 .description-title * {
   background: var(--light-gray);
+}
+
+.title {
+  padding-left: 10px;
 }
 
 #description-container table tr * {
@@ -134,7 +139,8 @@
   width: 100%;
 }
 
-#price-table tr {
+#price-table tr th,
+#price-table tr td {
   border: solid 1px var(--light-gray);
 }
 
