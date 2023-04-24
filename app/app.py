@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_mysqldb import MySQL
 
 
@@ -280,9 +280,7 @@ def crear_factura():
 def cargar_factura():
     data = dict(request.form.items())
     print(data)
-
-    return "se cargo"
-    # return redirect(url_for("crear_factura"))
+    return jsonify({"redirect_url": url_for("crear_factura")})
 
 
 if __name__ == "__main__":

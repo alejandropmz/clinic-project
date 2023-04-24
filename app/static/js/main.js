@@ -66,7 +66,11 @@ sendBillButton.addEventListener("click", function () {
   fetch("/cargar_factura", {
     method: "POST",
     body: new URLSearchParams([...dataClient, ...prices]),
-  }).then(function (response) {
-    console.log("response recived: ", response);
-  });
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      window.location.href = data.redirect_url;
+    });
 });
