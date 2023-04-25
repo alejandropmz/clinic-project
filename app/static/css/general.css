@@ -82,6 +82,7 @@
 
 #forms {
   margin: 0 20px 20px;
+  font-size: 0.9rem;
 }
 
 #forms table {
@@ -92,6 +93,10 @@
 
 #forms table tr #photo {
   width: 5%;
+}
+
+#forms table tr #min-width {
+  width: 7%;
 }
 
 #forms table tr #status {
@@ -158,12 +163,16 @@
 }
 
 #approve-dot {
-  width: 85%;
   margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
+
 #approve-dot i {
-  font-size: 1.6rem;
+  display: flex;
+  justify-content: start;
+  font-size: 2.5rem;
   color: var(--green-buttons);
 }
 
@@ -319,9 +328,6 @@ select {
     display: block;
   }
 
-  #forms table tr #photo {
-    width: auto;
-  }
 
   .dropdown {
     display: block;

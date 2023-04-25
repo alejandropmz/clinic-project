@@ -26,7 +26,7 @@
   <div
     class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center calendar"
   >
-    {% if appointment%}
+    {% if appointments %}
     <div class="dropdown">
       <button
         class="btn btn-secondary dropdown-toggle"
@@ -63,12 +63,13 @@
   <table>
     <tr>
       <th id="photo">No.</th>
-      <th>Fecha</th>
-      <th>Inicio</th>
-      <th>Fin</th>
+      <th id="min-width">Fecha</th>
+      <th id="min-width">Inicio</th>
+      <th id="min-width">Fin</th>
       <th>Paciente</th>
       <th>Razón de cita</th>
       <th>Estado</th>
+      <th>Pago</th>
       <th>Acciones</th>
     </tr>
     {% for appointment in appointments %}
@@ -102,6 +103,14 @@
         </div>
       </td>
       {% endif %}
+      <td>
+        <div
+          id="approve-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Pago</span>
+        </div>
+      </td>
       <td>
         <div class="options-buttons">
           <a href="/citas/{{appointment[0]}}"

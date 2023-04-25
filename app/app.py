@@ -225,8 +225,12 @@ def crear_cita():
         (date, start, end, reason, patient, 1),
     )
     mysql.connection.commit()
+
+    cursor.execute("SELECT * FROM pacientes WHERE id = %s", (patient))
+    patient_info = cursor.fetchall()
+    print(patient_info)
     cursor.close()
-    return redirect(url_for("citas"))
+    return render_template("create-bill.html", patient=patient_info[0])
 
 
 @app.route("/eliminar_cita/<int:id>")
@@ -276,11 +280,11 @@ def crear_factura():
     return render_template("create-bill.html")
 
 
-@app.route("/cargar_factura", methods=["POST"])
-def cargar_factura():
+@app.route("/guardar_factura", methods=["POST"])
+def guardar_factura():
     data = dict(request.form.items())
     print(data)
-    return jsonify({"redirect_url": url_for("crear_factura")})
+    return jsonify({"redirect_url": "facturas"})
 
 
 if __name__ == "__main__":

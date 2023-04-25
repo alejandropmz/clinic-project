@@ -52,6 +52,7 @@
 
   <!-- client info -->
   <!-- work with forms, javascript and ajax's query  -->
+  {% if patient %}
   <div class="row" id="client-bill-info">
     <div class="col-sm-12 col-md-7" id="client-info">
       <!-- patient info form -->
@@ -61,7 +62,11 @@
             <div id="name-title" class="title">
               <small><p>Nombres</p></small>
             </div>
-            <input type="text" name="client-names" />
+            <input
+              value="{{patient[2].title()}} {{patient[3].title()}}"
+              type="text"
+              name="client-names"
+            />
           </div>
         </label>
         <label for="">
@@ -69,11 +74,11 @@
             <div class="title">
               <small><p>Cedula</p></small>
             </div>
-            <input type="text" name="client-id" />
+            <input value="{{patient[1]}}" type="text" name="client-id" />
             <div class="title">
               <small><p>Teléfono</p></small>
             </div>
-            <input type="text" name="client-contact" />
+            <input value="{{patient[5]}}" type="text" name="client-contact" />
           </div>
         </label>
         <label for="">
@@ -81,11 +86,15 @@
             <div class="title">
               <small><p>Dirección</p></small>
             </div>
-            <input type="text" name="client-address" />
+            <input
+              value="{{patient[7].upper()}}"
+              type="text"
+              name="client-address"
+            />
             <div class="title">
               <small><p>Ciudad</p></small>
             </div>
-            <input type="text" name="client-city" />
+            <input value="Bogotá" type="text" name="client-city" />
           </div>
         </label>
       </form>
@@ -167,6 +176,8 @@
       </table>
     </div>
   </div>
+
+  {% endif %}
 
   <!-- footer -->
 
