@@ -57,6 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* send forms data */
 
+document.addEventListener("DOMContentLoaded", function () {
+  const numberToWords = require("number-to-words");
+
+  let num = 23;
+
+  console.log(numberToWords.toWords(num));
+
+});
+
 const sendBillButton = document.getElementById("send-bill-button");
 
 sendBillButton.addEventListener("click", function () {
