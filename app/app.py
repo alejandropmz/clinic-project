@@ -226,13 +226,16 @@ def crear_cita():
     )
     mysql.connection.commit()
 
-    cursor.execute("""
+    cursor.execute(
+        """
     SELECT pacientes.*, citas.fecha, citas.ingreso, citas.salida, citas.razon
     FROM pacientes
     JOIN citas
     ON pacientes.id = citas.paciente
     WHERE pacientes.id = %s
-    """, (patient))
+    """,
+        (patient),
+    )
     patient_info = cursor.fetchall()
     cursor.close()
     print(patient_info)
@@ -244,6 +247,7 @@ A ESTE ENDPOINT LE FALTA LA FECHA Y LAS HORAS DE ENTRADA Y SALIDA
 DE LA CONSULTA PARA PODER VINCULAR EL PAGO UNICO A LA CONSULTA
 PRIMERO AÑADIR ESTOS CAMPOS AL FORMULARIO DE LA FACTURA
  """
+
 
 @app.route("/eliminar_cita/<int:id>")
 def eliminar_cita(id):
@@ -295,28 +299,52 @@ def crear_factura():
 def guardar_factura():
     data = dict(request.form.items())
     print(data)
+    if data["appointment-cost"]:
+        float(data["appointment-cost"])
+    else:
+        data["appointment-cost"] = 0.0
     ## buscar paciente por id
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "SELECT id FROM pacientes WHERE identificacion = %s", (data["client-id"])
+        "SELECT id FROM pacientes WHERE identificacion = %s", ((data["client-id"],))
     )
+    # fetchone para traer un solo registro y optimizar el código
     patient_id = cursor.fetchone()[0]
 
+    ## buscar la cita exacta del paciente para la factura
     cursor.execute(
         """
-    INSERT INTO pagos (valor, descripcion)
-    VALUES (%s, %s)
+    SELECT id FROM citas WHERE paciente = %s AND fecha = %s AND ingreso = %s AND salida = %s
     """,
-        (data["appointment-cost"], data["appointment-description"]),
+        (patient_id, data["date"], data["start"], data["end"]),
     )
+    # fetchone para traer un solo registro y optimizar el código
+    appointment_id = cursor.fetchone()[0]
 
+    ## guardar la info de los forms en la base de datos del pago
     cursor.execute(
         """
-    SELECT id FROM citas WHERE paciente = %s, AND cita
-    """
+    INSERT INTO pagos (valor, descripcion, estado, cita)
+    VALUES (%s, %s, %s, %s)
+    """,
+        (
+            data["appointment-cost"],
+            data["appointment-description"],
+            2,
+            appointment_id,
+        ),
     )
 
-    cursor.execute
+    # guardamos en una variable el valor del último id (de un INSERT o UPDATE) para usarlo en pagos_pacientes
+    paid_id = cursor.lastrowid
+
+    ## insertamos el pago relacionado con el paciente en la tabla pagos_pacientes
+    cursor.execute(
+        "INSERT INTO pagos_pacientes (id_pago, id_paciente) VALUES (%s, %s)",
+        (paid_id, patient_id),
+    )
+    mysql.connection.commit()
+    cursor.close()
     return jsonify({"redirect_url": "facturas"})
 
 
