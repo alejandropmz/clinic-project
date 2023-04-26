@@ -226,12 +226,24 @@ def crear_cita():
     )
     mysql.connection.commit()
 
-    cursor.execute("SELECT * FROM pacientes WHERE id = %s", (patient))
+    cursor.execute("""
+    SELECT pacientes.*, citas.fecha, citas.ingreso, citas.salida, citas.razon
+    FROM pacientes
+    JOIN citas
+    ON pacientes.id = citas.paciente
+    WHERE pacientes.id = %s
+    """, (patient))
     patient_info = cursor.fetchall()
-    print(patient_info)
     cursor.close()
+    print(patient_info)
     return render_template("create-bill.html", patient=patient_info[0])
 
+
+""" 
+A ESTE ENDPOINT LE FALTA LA FECHA Y LAS HORAS DE ENTRADA Y SALIDA
+DE LA CONSULTA PARA PODER VINCULAR EL PAGO UNICO A LA CONSULTA
+PRIMERO AÑADIR ESTOS CAMPOS AL FORMULARIO DE LA FACTURA
+ """
 
 @app.route("/eliminar_cita/<int:id>")
 def eliminar_cita(id):
@@ -263,7 +275,6 @@ def paciente_citas(paciente_id):
     )
     all_data = cursor.fetchall()
     cursor.close()
-    print(all_data)
     return render_template("patient-appointment-list.html", data=all_data)
 
 
@@ -284,6 +295,28 @@ def crear_factura():
 def guardar_factura():
     data = dict(request.form.items())
     print(data)
+    ## buscar paciente por id
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "SELECT id FROM pacientes WHERE identificacion = %s", (data["client-id"])
+    )
+    patient_id = cursor.fetchone()[0]
+
+    cursor.execute(
+        """
+    INSERT INTO pagos (valor, descripcion)
+    VALUES (%s, %s)
+    """,
+        (data["appointment-cost"], data["appointment-description"]),
+    )
+
+    cursor.execute(
+        """
+    SELECT id FROM citas WHERE paciente = %s, AND cita
+    """
+    )
+
+    cursor.execute
     return jsonify({"redirect_url": "facturas"})
 
 

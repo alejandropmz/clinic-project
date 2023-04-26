@@ -61,11 +61,18 @@ const sendBillButton = document.getElementById("send-bill-button");
 
 sendBillButton.addEventListener("click", function () {
   const dataClient = new FormData(document.getElementById("data-client-form"));
+  const appointmentInfo = new FormData(
+    document.getElementById("appointment-info-form")
+  );
   const appoinmentPrices = new FormData(document.getElementById("prices-form"));
 
   fetch("/guardar_factura", {
     method: "POST",
-    body: new URLSearchParams([...dataClient, ...appoinmentPrices]),
+    body: new URLSearchParams([
+      ...dataClient,
+      ...appointmentInfo,
+      ...appoinmentPrices,
+    ]),
   })
     .then(function (response) {
       return response.json();

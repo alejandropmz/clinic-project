@@ -82,6 +82,21 @@
   margin: 0;
 }
 
+#appointment-info-container {
+  margin: 20px 0;
+}
+
+#appointment-info-container form tr div  {
+  background: var(--light-gray);
+}
+
+#appointment-info-container input {
+  border: solid var(--light-gray) 1px;
+  outline: none;
+  font-size: 0.8rem;
+  padding-left: 2px;
+}
+
 #description-container {
   padding: 0;
 }

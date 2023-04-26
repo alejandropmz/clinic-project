@@ -87,7 +87,7 @@
               <small><p>Dirección</p></small>
             </div>
             <input
-              value="{{patient[7].upper()}}"
+              value="{{patient[7].capitalize()}}"
               type="text"
               name="client-address"
             />
@@ -114,11 +114,67 @@
     </div>
   </div>
 
+  <!-- mount in lyric and number -->
+
+  <div id="appointment-info-container">
+    <form
+      class="d-flex justify-content-between"
+      action=""
+      id="appointment-info-form"
+    >
+      <tr>
+        <div>
+          <th>
+            <small><strong>Fecha</strong></small>
+          </th>
+          <td>
+            <input
+              name="date"
+              value="{{patient[8]}}"
+              type="text"
+              placeholder="Fecha de cita"
+            />
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div>
+          <th>
+            <small><strong>Hora de ingreso</strong></small>
+          </th>
+          <td>
+            <input
+              name="start"
+              value="{{patient[9]}}"
+              type="text"
+              placeholder="Hora de ingreso"
+            />
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div>
+          <th>
+            <small><strong>Hora de salida</strong></small>
+          </th>
+          <td>
+            <input
+              name="end"
+              value="{{patient[10]}}"
+              type="text"
+              placeholder="Hora de salida"
+            />
+          </td>
+        </div>
+      </tr>
+    </form>
+  </div>
+
   <!-- description -->
 
   <div id="description-container" class="container">
     <form id="prices-form" action="">
-      <table class="row">
+      <table>
         <tr class="description-title">
           <th>Descripción</th>
           <th id="price">Costo</th>
@@ -129,6 +185,7 @@
               name="appointment-description"
               type="text"
               placeholder="Descripción de consulta"
+              value="{{patient[11]}}"
             />
           </td>
           <td>
@@ -144,7 +201,8 @@
     </form>
   </div>
 
-  <!-- mount in lyric and number -->
+  <!-- appointment info -->
+  <div id="appointment-info"></div>
 
   <div class="row" id="total-amount">
     <!-- in lyrics -->
