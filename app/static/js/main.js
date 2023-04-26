@@ -57,36 +57,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* send forms data */
 
-document.addEventListener("DOMContentLoaded", function () {
-  const numberToWords = require("number-to-words");
+/* document.addEventListener("DOMContentLoaded", function () {
+  const numberToSpanishWords = require("number-to-spanish-words");
 
   let num = 23;
 
-  console.log(numberToWords.toWords(num));
+  console.log(numberToSpanishWords.toWords(num));
+}); */
+document.addEventListener("DOMContentLoaded", function () {
+  const sendBillButton = document.getElementById("send-bill-button");
 
-});
+  if (sendBillButton == null) {
+    return "";
+  }
 
-const sendBillButton = document.getElementById("send-bill-button");
+  sendBillButton.addEventListener("click", function () {
+    const dataClient = new FormData(
+      document.getElementById("data-client-form")
+    );
+    const appointmentInfo = new FormData(
+      document.getElementById("appointment-info-form")
+    );
+    const appoinmentPrices = new FormData(
+      document.getElementById("prices-form")
+    );
 
-sendBillButton.addEventListener("click", function () {
-  const dataClient = new FormData(document.getElementById("data-client-form"));
-  const appointmentInfo = new FormData(
-    document.getElementById("appointment-info-form")
-  );
-  const appoinmentPrices = new FormData(document.getElementById("prices-form"));
-
-  fetch("/guardar_factura", {
-    method: "POST",
-    body: new URLSearchParams([
-      ...dataClient,
-      ...appointmentInfo,
-      ...appoinmentPrices,
-    ]),
-  })
-    .then(function (response) {
-      return response.json();
+    fetch("/guardar_factura", {
+      method: "POST",
+      body: new URLSearchParams([
+        ...dataClient,
+        ...appointmentInfo,
+        ...appoinmentPrices,
+      ]),
     })
-    .then(function (data) {
-      window.location.href = data.redirect_url;
-    });
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        window.location.href = data.redirect_url;
+      });
+  });
 });
