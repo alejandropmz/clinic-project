@@ -46,23 +46,31 @@
       <th>Estado</th>
       <th>Acciones</th>
     </tr>
-    <tr>
-      <td>1</td>
-      <td>alejandor pacheco</td>
-      <td>23/04/2023</td>
-      <td>$200.000</td>
-      <td>PAGADA</td>
-      <td>
-        <div class="options-buttons">
-          <a href="#"
-            ><button type="button">
-              <i class="bi bi-eye"></i>
-              Ver
-            </button></a
-          >
-        </div>
-      </td>
-    </tr>
+    {% if bills %}
+      {% for bill in bills %}
+      <tr>
+        <td>{{bill[2]}}</td>
+        <td>{{bill[0].title()}} {{bill[1].title()}}</td>
+        <td>{{bill[3]}}</td>
+        <td>${{bill[4]}}</td>
+        {% if bill[5] == 2 %}
+        <td>PENDIENTE</td>
+        {% else %}
+        <td>PAGADA</td>
+        {% endif %}
+        <td>
+          <div class="options-buttons">
+            <a href="#"
+              ><button type="button">
+                <i class="bi bi-eye"></i>
+                Ver
+              </button></a
+            >
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    {% endif %}
   </table>
 </div>
 

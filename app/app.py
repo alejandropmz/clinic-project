@@ -287,7 +287,22 @@ def paciente_citas(paciente_id):
 
 @app.route("/facturas")
 def facturas():
-    return render_template("bills.html")
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        """
+    SELECT pacientes.nombres, pacientes.apellidos, pagos.id, pagos.fecha_pago, pagos.valor, pagos.estado
+    FROM pagos_pacientes
+    JOIN pacientes
+    ON pagos_pacientes.id_paciente = pacientes.id
+    JOIN citas
+    ON pacientes.id = citas.paciente
+    JOIN pagos
+    ON pagos.id = pagos_pacientes.id_pago
+    """
+    )
+    data = cursor.fetchall()
+    print(data)
+    return render_template("bills.html", bills=data)
 
 
 @app.route("/crear_factura")
