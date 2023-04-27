@@ -5,7 +5,10 @@
   <div class="col-sm-12 col-md-6">
     <i class="bx bx-calendar-check"></i>
     <div class="detail">
-      <h4>Factura de {{all_data[0].title()}}</h4>
+      <h4>
+        Factura de {{all_data[0].split(" ")[0].title()}} {{all_data[1].split("
+        ")[0].title()}}
+      </h4>
     </div>
   </div>
 </div>
@@ -282,4 +285,12 @@
     </div>
   </div>
 </div>
+
+<!-- buttons -->
+<div class="d-flex justify-content-center" id="bill-buttons">
+  <a href="/facturas"><button type="button" id="back-button">Atrás</button></a>
+  <button type="button" id="send-bill-button">Imprimir factura</button>
+  <button type="button" id="modify-button">Compartir</button>
+</div>
+
 {% endblock %}
