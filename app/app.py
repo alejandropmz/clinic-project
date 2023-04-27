@@ -297,6 +297,7 @@ def facturas():
     )
     data = cursor.fetchall()
     cursor.close()
+    print(data)
     return render_template("bills.html", bills=data)
 
 
@@ -331,7 +332,6 @@ def detalle_facturas(id):
     amount_iva = float(data[0][5] * 0.19)
     iva = "{:,.2f}".format(amount_iva)
     total = "{:,.2f}".format(float(data[0][5]) + float(data[0][5] * 0.19))
-    print(data[0])
     return render_template(
         "bill-detail.html",
         all_data=data[0],

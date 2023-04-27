@@ -50,8 +50,10 @@
     <tr>
       <td>{{bill[2]}}</td>
       <td>{{bill[0].title()}} {{bill[1].title()}}</td>
-      <td>{{bill[3]}}</td>
-      <td>${{bill[4]}}</td>
+      <td>
+        {{bill[3].strftime("%Y-%m-%d").split("-")[2]}}/{{bill[3].strftime("%Y-%m-%d").split("-")[1]}}/{{bill[3].strftime("%Y-%m-%d").split("-")[0]}}
+      </td>
+      <td>${{"{:,.2f}".format(bill[4])}}</td>
       <td>
         {% if bill[5] == 2 %}
         <div
