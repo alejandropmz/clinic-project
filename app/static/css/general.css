@@ -176,6 +176,20 @@
   color: var(--green-buttons);
 }
 
+#pending-dot {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+#pending-dot i {
+  display: flex;
+  justify-content: start;
+  font-size: 2.5rem;
+  color: var(--gray-borders);
+}
+
 #dropdownMenuButton1 {
   background: var(--buttons-blue);
 }
