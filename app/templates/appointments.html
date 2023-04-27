@@ -104,12 +104,21 @@
       </td>
       {% endif %}
       <td>
+        {% if appointment[9] == 2 %}
+        <div
+            id="pending-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Pendiente</span>
+        </div>
+        {% else %}
         <div
           id="approve-dot"
           class="d-flex justify-content-center align-items-center"
         >
           <i class="bi bi-dot"></i><span>Pago</span>
         </div>
+        {% endif %}
       </td>
       <td>
         <div class="options-buttons">

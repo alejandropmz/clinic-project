@@ -52,18 +52,23 @@
       <td>{{bill[0].title()}} {{bill[1].title()}}</td>
       <td>{{bill[3]}}</td>
       <td>${{bill[4]}}</td>
-      {% if bill[5] == 2 %}
       <td>
+        {% if bill[5] == 2 %}
         <div
           id="pending-dot"
           class="d-flex justify-content-center align-items-center"
         >
           <i class="bi bi-dot"></i><span>Pendiente</span>
         </div>
+        {% else %}
+        <div
+          id="approve-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Pagada</span>
+        </div>
+        {% endif %}
       </td>
-      {% else %}
-      <td>PAGADA</td>
-      {% endif %}
       <td>
         <div class="options-buttons">
           <a href="#"

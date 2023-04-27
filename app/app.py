@@ -126,15 +126,17 @@ def citas():
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
-    SELECT citas.*, pacientes.nombres, pacientes.apellidos
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pagos.estado
     FROM citas
     JOIN pacientes
     ON citas.paciente = pacientes.id
-    
+    JOIN pagos
+    ON pagos.cita = citas.id
     """
     )
     all_data = cursor.fetchall()
     cursor.close()
+    print(all_data)
     return render_template("appointments.html", appointments=all_data)
 
 
@@ -238,15 +240,7 @@ def crear_cita():
     )
     patient_info = cursor.fetchall()
     cursor.close()
-    print(patient_info)
     return render_template("create-bill.html", patient=patient_info[0])
-
-
-""" 
-A ESTE ENDPOINT LE FALTA LA FECHA Y LAS HORAS DE ENTRADA Y SALIDA
-DE LA CONSULTA PARA PODER VINCULAR EL PAGO UNICO A LA CONSULTA
-PRIMERO AÑADIR ESTOS CAMPOS AL FORMULARIO DE LA FACTURA
- """
 
 
 @app.route("/eliminar_cita/<int:id>")
@@ -301,7 +295,6 @@ def facturas():
     """
     )
     data = cursor.fetchall()
-    print(data)
     return render_template("bills.html", bills=data)
 
 
@@ -313,7 +306,6 @@ def crear_factura():
 @app.route("/guardar_factura", methods=["POST"])
 def guardar_factura():
     data = dict(request.form.items())
-    print(data)
     if data["appointment-cost"]:
         float(data["appointment-cost"])
     else:
