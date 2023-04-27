@@ -1,0 +1,285 @@
+{% extends 'layout.html' %} {% block body %}
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
+  <div class="col-sm-12 col-md-6">
+    <i class="bx bx-calendar-check"></i>
+    <div class="detail">
+      <h4>Factura de {{all_data[0].title()}}</h4>
+    </div>
+  </div>
+</div>
+
+<!-- static info -->
+
+<div class="container create-bill-container">
+  <!-- header -->
+  <div class="row" id="bill-header">
+    <div class="col-sm-12 col-md-4 d-flex justify-content-center" id="logo">
+      <img src="../static/css/images/clinic-logo.jpg" alt="" />
+    </div>
+    <div
+      class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
+      id="info"
+    >
+      <strong
+        ><small><p>Clinic project center</p></small></strong
+      >
+      <strong
+        ><small><p>NIT X. XXX-XXX-XXX</p></small></strong
+      >
+      <strong>
+        <small><p>Cl 12 N XX - XXX</p></small>
+      </strong>
+      <strong
+        ><small><p>Tel: 3256985</p></small></strong
+      >
+      <strong
+        ><small><p>Bogotá - Colombia</p></small></strong
+      >
+      <strong
+        ><small><p>algunaempresa@gmail.com</p></small></strong
+      >
+    </div>
+    <div
+      class="col-sm-12 col-md-4 d-flex flex-column justify-content-center"
+      id="bill-number"
+    >
+      <h4><strong>Factura no.</strong></h4>
+      <h5>{{all_data[8]}}</h5>
+    </div>
+  </div>
+
+  <!-- client info -->
+  <!-- work with forms, javascript and ajax's query  -->
+
+  <div class="row" id="client-bill-info">
+    <div class="col-sm-12 col-md-7" id="client-info">
+      <!-- patient info form -->
+      <form id="data-client-form" class="d-flex flex-column" action="">
+        <label for="">
+          <div class="d-flex">
+            <div id="name-title" class="title">
+              <small><p>Nombres</p></small>
+            </div>
+            <input
+              value="{{all_data[0].title()}} {{all_data[1].title()}}"
+              type="text"
+              name="client-names"
+              readonly
+            />
+          </div>
+        </label>
+        <label for="">
+          <div class="d-flex">
+            <div class="title">
+              <small><p>Cedula</p></small>
+            </div>
+            <input
+              value="{{all_data[2]}}"
+              type="text"
+              name="client-id"
+              readonly
+            />
+            <div class="title">
+              <small><p>Teléfono</p></small>
+            </div>
+            <input
+              value="{{all_data[3]}}"
+              type="text"
+              name="client-contact"
+              readonly
+            />
+          </div>
+        </label>
+        <label for="">
+          <div class="d-flex">
+            <div class="title">
+              <small><p>Dirección</p></small>
+            </div>
+            <input
+              value="{{all_data[4]}}"
+              type="text"
+              name="client-address"
+              readonly
+            />
+            <div class="title">
+              <small><p>Ciudad</p></small>
+            </div>
+            <input value="Bogotá" type="text" name="client-city" readonly />
+          </div>
+        </label>
+      </form>
+    </div>
+
+    <!-- bill info form -->
+    <div
+      class="col-sm-12 col-md-5 d-flex flex-column justify-content-center align-items-center"
+      id="bill-info"
+    >
+      <div id="bill-date-title">
+        <p>Fecha factura</p>
+      </div>
+      <div>
+        <p>
+          {{date.split("-")[2]}}/{{date.split("-")[1]}}/{{date.split("-")[0]}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- mount in lyric and number -->
+
+  <div id="appointment-info-container">
+    <form
+      class="d-flex justify-content-between"
+      action=""
+      id="appointment-info-form"
+    >
+      <tr>
+        <div>
+          <th>
+            <small><strong>Fecha</strong></small>
+          </th>
+          <td>
+            <input
+              name="date"
+              value="{{appointment_date.split('-')[2]}}/{{appointment_date.split('-')[1]}}/{{appointment_date.split('-')[0]}}"
+              type="text"
+              placeholder="Fecha de cita"
+              readonly
+            />
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div>
+          <th>
+            <small><strong>Hora de ingreso</strong></small>
+          </th>
+          <td>
+            <input
+              name="start"
+              value="{{start}}"
+              type="text"
+              placeholder="Hora de ingreso"
+              readonly
+            />
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <div>
+          <th>
+            <small><strong>Hora de salida</strong></small>
+          </th>
+          <td>
+            <input
+              name="end"
+              value="{{end}}"
+              type="text"
+              placeholder="Hora de salida"
+              readonly
+            />
+          </td>
+        </div>
+      </tr>
+    </form>
+  </div>
+
+  <!-- description -->
+
+  <div id="description-container" class="container">
+    <form id="prices-form" action="">
+      <table>
+        <tr class="description-title">
+          <th>Descripción</th>
+          <th id="price">Costo</th>
+        </tr>
+        <tr id="description-inputs">
+          <td>
+            <input
+              name="appointment-description"
+              type="text"
+              placeholder="Descripción de consulta"
+              value="{{all_data[7]}}"
+              readonly
+            />
+          </td>
+          <td>
+            <input
+              name="appointment-cost"
+              id="cost-input"
+              type="text"
+              placeholder="Monto cobrado"
+              value="${{amount}}"
+              readonly
+            />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+  <!-- appointment info -->
+  <div id="appointment-info"></div>
+
+  <div class="row" id="total-amount">
+    <!-- in lyrics -->
+    <div class="col-sm-12 col-md-9" id="lyric-amount">
+      <div id="lyric">
+        <p><strong>Valor en letras</strong></p>
+        <p id="margin">Doscientos ochenta mil pesos</p>
+      </div>
+      <div id="observations">
+        <p><strong>Observaciones</strong></p>
+        <p id="margin">Se genera pago a través de tarjeta de crédito</p>
+      </div>
+    </div>
+    <!-- in numbers -->
+    <div class="col-sm-12 col-md-3" id="number-amount">
+      <table id="price-table">
+        <tr>
+          <th><small>Total bruto</small></th>
+          <td>
+            <input readonly value="${{amount}}" id="cost-output" type="text" />
+          </td>
+        </tr>
+        <tr>
+          <th><small>IVA 19%</small></th>
+          <td>
+            <input
+              readonly
+              value="${{iva}}"
+              id="const-iva-output"
+              type="text"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th><small>Total a pagar</small></th>
+          <td>
+            <input readonly value="${{total}}" id="total-cost" type="text" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- footer -->
+
+  <div class="container" id="bill-footer">
+    <div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae ea ipsam
+        ex. Illo dolore, sapiente quibusdam, perferendis a deserunt, dolorem
+        expedita necessitatibus molestias praesentium possimus architecto.
+        Cumque, dolor quas. Saepe Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit. Facere quasi corrupti ullam assumenda consequuntur
+        deserunt accusamus consequatur rerum ducimus aperiam corporis, quae
+        maxime laboriosam autem enim numquam velit voluptate sequi!
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
