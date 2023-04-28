@@ -57,13 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* send forms data */
 
-/* document.addEventListener("DOMContentLoaded", function () {
-  const numberToSpanishWords = require("number-to-spanish-words");
+document.addEventListener("DOMContentLoaded", function () {
+  const writtenNumbers = require("written-number");
 
-  let num = 23;
+  console.log(writtenNumbers(123));
 
-  console.log(numberToSpanishWords.toWords(num));
-}); */
+  console.log(writtenNumbers.toWords(num));
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const sendBillButton = document.getElementById("send-bill-button");
 
