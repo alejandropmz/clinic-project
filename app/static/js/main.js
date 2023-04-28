@@ -82,12 +82,15 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("prices-form")
     );
 
+    const observations = new FormData(document.getElementById("observations"));
+
     fetch("/guardar_factura", {
       method: "POST",
       body: new URLSearchParams([
         ...dataClient,
         ...appointmentInfo,
         ...appoinmentPrices,
+        ...observations,
       ]),
     })
       .then(function (response) {

@@ -154,6 +154,14 @@
   width: 100%;
 }
 
+#observations input {
+  border: solid 1px var(--gray-borders);
+  outline: none;
+  padding-left: 3px;
+  margin-left: 20px;
+  width: 50%;
+}
+
 #price-table tr th,
 #price-table tr td {
   border: solid 1px var(--light-gray);

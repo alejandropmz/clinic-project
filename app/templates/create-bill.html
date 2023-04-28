@@ -211,9 +211,11 @@
         <p><strong>Valor en letras</strong></p>
         <p id="margin">Doscientos ochenta mil pesos</p>
       </div>
-      <div id="observations">
+      <div>
         <p><strong>Observaciones</strong></p>
-        <p id="margin">Se genera pago a través de tarjeta de crédito</p>
+        <form id="observations" action="">
+          <input placeholder="Observaciones" name="observations" type="text" />
+        </form>
       </div>
     </div>
     <!-- in numbers -->
@@ -256,7 +258,10 @@
 
 <!-- buttons -->
 <div class="d-flex justify-content-center" id="bill-buttons">
-  <button id="cancel-form-button">Cancelar</button>
+  <a href="/citas"
+    ><button type="button" id="cancel-form-button">Cancelar</button></a
+  >
+  <!-- el actions se hace desde js -->
   <button type="button" id="send-bill-button">Generar factura</button>
 </div>
 {% endblock %}
