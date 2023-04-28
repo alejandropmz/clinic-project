@@ -86,7 +86,7 @@
   margin: 20px 0;
 }
 
-#appointment-info-container form tr div  {
+#appointment-info-container form tr div {
   background: var(--light-gray);
 }
 
@@ -195,4 +195,17 @@
 
 #pay-status * {
   margin: 0 3px;
+}
+
+#change-paid-button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--blue);
+  color: white;
+}
+
+#change-paid-button:hover {
+  background: var(--blue-hover);
+  transition: all ease-in 0.3s;
 }

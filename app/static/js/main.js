@@ -98,3 +98,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const changePaidButton = document.getElementById("change-paid-button");
+
+  if (changePaidButton == null) {
+    return "";
+  }
+
+  changePaidButton.addEventListener("click", (e) => {
+    if (!confirm("¿Marcar la factura como paga?")) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+});

@@ -296,6 +296,13 @@
 </div>
 
 <!-- paid button -->
+{% if all_data[9] == 2 %}
+<div class="d-flex justify-content-center">
+  <a href="/pagar_factura/{{all_data[8]}}"
+    ><button type="button" id="change-paid-button">Factura paga</button></a
+  >
+</div>
+{% else %} {% endif %}
 
 <!-- buttons -->
 <div class="d-flex justify-content-center" id="bill-buttons">

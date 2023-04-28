@@ -348,6 +348,15 @@ def detalle_facturas(id):
     )
 
 
+@app.route("/pagar_factura/<int:id>")
+def pagar_factura(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("UPDATE pagos SET estado = %s WHERE id = %s", (1, id))
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for("detalle_facturas", id=id))
+
+
 @app.route("/crear_factura")
 def crear_factura():
     return render_template("create-bill.html")
