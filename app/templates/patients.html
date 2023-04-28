@@ -35,8 +35,7 @@
       </ul>
     </nav>
   </div>
-  {% else %}
-  {% endif %}
+  {% else %} {% endif %}
 </div>
 
 <!-- render data information -->
@@ -65,6 +64,7 @@
         {{patient[4].split("-")[2]}}/{{patient[4].split("-")[1]}}/{{patient[4].split("-")[0]}}
       </td>
       <td>
+        {% if appointments %}
         <div class="dropdown">
           <button
             class="btn btn-secondary dropdown-toggle"
@@ -87,6 +87,13 @@
             {% endif %} {% endif %} {% endfor %} {% endif %}
           </ul>
         </div>
+        {% else %}
+        <a href="/crear_cita"
+          ><button type="button" id="add-appointment-patient">
+            Agregar cita
+          </button></a
+        >
+        {% endif %}
       </td>
       <td>
         <div class="options-buttons">
