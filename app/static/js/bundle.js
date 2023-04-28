@@ -39,6 +39,7 @@
   {
     1: [
       function (require, module, exports) {
+        /* For the delete and update buttons */
         document.addEventListener("DOMContentLoaded", function () {
           const deleteButton = document.getElementById("delete-button");
           if (deleteButton == null) {
@@ -67,6 +68,7 @@
           });
         });
 
+        /* For the dinamic cost in create bill */
         document.addEventListener("DOMContentLoaded", function () {
           const costInput = document.getElementById("cost-input");
           const costOutput = document.getElementById("cost-output");
@@ -97,15 +99,31 @@
                   parseInt(e.target.value) +
                   parseInt(e.target.value) * 0.19
                 ).toLocaleString();
-              priceInWords.value = writtenNumbers(parseInt(e.target.value), {
-                lang: "es",
-              });
+              priceInWords.value = writtenNumbers(
+                parseInt(e.target.value) + parseInt(e.target.value) * 0.19,
+                {
+                  lang: "es",
+                }
+              );
               priceInWords.value =
                 priceInWords.value[0].toUpperCase() +
                 priceInWords.value.substring(1);
             }
           });
         });
+
+        /* For the resumen bill */
+        /* document.addEventListener("DOMContentLoaded", function () {
+          const totalCostResumen =
+            document.getElementById("total-cost-resumen");
+          const priceInWordsResumen = document.getElementById(
+            "price-in-words-resumen"
+          );
+
+          const writtenNumber = require("written-number");
+          console.log(typeof(totalCostResumen.value));
+          priceInWordsResumen.value = writtenNumber(totalCostResumen.value);
+        }); */
 
         /* send forms data */
 
@@ -127,6 +145,10 @@
               document.getElementById("prices-form")
             );
 
+            const lyricAmount = new FormData(
+              document.getElementById("lyric-amount")
+            );
+
             const observations = new FormData(
               document.getElementById("observations")
             );
@@ -137,6 +159,7 @@
                 ...dataClient,
                 ...appointmentInfo,
                 ...appoinmentPrices,
+                ...lyricAmount,
                 ...observations,
               ]),
             })

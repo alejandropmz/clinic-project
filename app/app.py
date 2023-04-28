@@ -307,7 +307,7 @@ def detalle_facturas(id):
     cursor.execute(
         """
     SELECT pacientes.nombres, pacientes.apellidos, pacientes.identificacion, pacientes.contacto, pacientes.direccion,
-    pagos.valor, pagos.fecha_pago, pagos.descripcion, pagos.id, pagos.estado, pagos.observaciones,
+    pagos.valor, pagos.valor_en_letras, pagos.fecha_pago, pagos.descripcion, pagos.id, pagos.estado, pagos.observaciones,
     citas.fecha, citas.ingreso, citas.salida
     FROM pagos
     JOIN pagos_pacientes
@@ -322,13 +322,13 @@ def detalle_facturas(id):
     )
     data = cursor.fetchall()
     cursor.close()
-    date = data[0][6].strftime("%Y-%m-%d")
-    appointment_date = data[0][11].strftime("%Y-%m-%d")
+    date = data[0][7].strftime("%Y-%m-%d")
+    appointment_date = data[0][12].strftime("%Y-%m-%d")
     ## para poder mostrar la hora, mirar luego
     """ start = data[0][10].strftime("%H:%M:%S")
     end = data[0][11].strftime("%H:%M:%S") """
-    start = str(data[0][12])
-    end = str(data[0][13])
+    start = str(data[0][13])
+    end = str(data[0][14])
     amount = "{:,.2f}".format(data[0][5])
     amount_iva = float(data[0][5] * 0.19)
     iva = "{:,.2f}".format(amount_iva)
@@ -390,11 +390,12 @@ def guardar_factura():
     ## guardar la info de los forms en la base de datos del pago
     cursor.execute(
         """
-    INSERT INTO pagos (valor, descripcion, estado, observaciones, cita)
-    VALUES (%s, %s, %s, %s, %s)
+    INSERT INTO pagos (valor, valor_en_letras, descripcion, estado, observaciones, cita)
+    VALUES (%s, %s, %s, %s, %s, %s)
     """,
         (
             data["appointment-cost"],
+            data["lyric-amount"],
             data["appointment-description"],
             2,
             data["observations"],

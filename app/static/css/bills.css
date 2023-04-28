@@ -141,6 +141,10 @@
   margin-left: 20px;
 }
 
+#lyric-amount #price-in-words {
+  margin-left: 20px;
+}
+
 #number-amount {
   padding: 0;
 }
@@ -152,6 +156,13 @@
 
 #number-amount * {
   width: 100%;
+}
+
+#price-in-words,
+#price-in-words-resumen {
+  border: none;
+  width: 100%;
+  outline: none;
 }
 
 #observations input {

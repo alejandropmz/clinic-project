@@ -205,7 +205,7 @@
               name="appointment-description"
               type="text"
               placeholder="Descripción de consulta"
-              value="{{all_data[7]}}"
+              value="{{all_data[8]}}"
               readonly
             />
           </td>
@@ -229,22 +229,21 @@
 
   <div class="row" id="total-amount">
     <!-- in lyrics -->
-    <div class="col-sm-12 col-md-9" id="lyric-amount">
+    <div class="col-sm-12 col-md-9">
       <div id="lyric">
         <p><strong>Valor en letras</strong></p>
         <p id="margin">
           <input
-            id="price-in-words"
-            style="border: none; outline: none"
+            id="price-in-words-resumen"
             type="text"
-            value=""
+            value="{{all_data[6]}}"
             readonly
           />
         </p>
       </div>
       <div id="observations">
         <p><strong>Observaciones</strong></p>
-        <p id="margin">{{all_data[10].capitalize()}}</p>
+        <p id="margin">{{all_data[11].capitalize()}}</p>
       </div>
     </div>
     <!-- in numbers -->
@@ -270,7 +269,7 @@
         <tr>
           <th><small>Total a pagar</small></th>
           <td>
-            <input readonly value="${{total}}" id="total-cost" type="text" />
+            <input readonly value="${{total}}" id="total-cost-resumen" type="text" />
           </td>
         </tr>
       </table>
