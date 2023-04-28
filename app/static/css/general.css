@@ -225,6 +225,7 @@
 /* detail info container */
 
 .detail-info-container {
+  margin: 40px 0;
   border: solid var(--light-gray);
   border-width: 1px 0 1px;
   padding: 20px 0;

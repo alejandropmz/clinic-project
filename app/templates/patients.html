@@ -25,6 +25,7 @@
       ><button type="button">Agregar paciente</button></a
     >
   </div>
+  {% if patients %}
   <div class="col-sm-12 col-md-6 pagination">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
@@ -34,6 +35,8 @@
       </ul>
     </nav>
   </div>
+  {% else %}
+  {% endif %}
 </div>
 
 <!-- render data information -->
@@ -101,12 +104,9 @@
           </a>
         </div>
       </td>
-      {% endfor %} {% else %}
     </tr>
+    {% endfor %} {% else %}
 
-    <div
-      class="row container-fluid sub-nav d-flex justify-content-between"
-    ></div>
     <div class="d-flex justify-content-center detail-info-container">
       <h2>No hay pacientes registrados</h2>
     </div>

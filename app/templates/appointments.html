@@ -43,7 +43,6 @@
         <li><a class="dropdown-item" href="#">24/04</a></li>
       </ul>
     </div>
-    {% else %} {% endif %}
   </div>
   <div class="col-sm-12 col-md-4 pagination">
     <nav aria-label="Page navigation example">
@@ -54,6 +53,7 @@
       </ul>
     </nav>
   </div>
+  {% else %} {% endif %}
 </div>
 
 <!-- render appointment information -->
@@ -106,7 +106,7 @@
       <td>
         {% if appointment[9] == 2 %}
         <div
-            id="pending-dot"
+          id="pending-dot"
           class="d-flex justify-content-center align-items-center"
         >
           <i class="bi bi-dot"></i><span>Pendiente</span>
@@ -139,9 +139,6 @@
     </tr>
     {% endfor %} {% else %}
 
-    <div
-      class="row container-fluid sub-nav d-flex justify-content-between"
-    ></div>
     <div class="d-flex justify-content-center detail-info-container">
       <h2>No tiene citas disponibles</h2>
     </div>

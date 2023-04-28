@@ -24,6 +24,7 @@
   <!-- <div class="col-sm-12 col-md-6 buttons">
     <a href="/crear_factura"><button type="button">Agregar factura</button></a>
   </div> -->
+  {% if bills %}
   <div class="col-12 d-flex justify-content-end pagination">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
@@ -33,11 +34,14 @@
       </ul>
     </nav>
   </div>
+  {% else %}
+  {% endif %}
 </div>
 
 <!-- render data information -->
 
 <div id="forms" class="f-flex justify-content-center">
+  {% if bills %}
   <table>
     <tr>
       <th id="photo">No.</th>
@@ -47,7 +51,7 @@
       <th>Estado</th>
       <th>Acciones</th>
     </tr>
-    {% if bills %} {% for bill in bills %}
+    {% for bill in bills %}
     <tr>
       <td>{{bill[2]}}</td>
       <td>{{bill[0].title()}} {{bill[1].title()}}</td>
@@ -83,8 +87,11 @@
         </div>
       </td>
     </tr>
-    {% endfor %} {% endif %}
+    {% endfor %}
   </table>
 </div>
-
-{% endblock %}
+{% else %}
+<div class="d-flex justify-content-center detail-info-container">
+  <h2>No tiene facturas disponibles</h2>
+</div>
+{% endif %} {% endblock %}
