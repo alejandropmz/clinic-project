@@ -307,7 +307,7 @@ def detalle_facturas(id):
     cursor.execute(
         """
     SELECT pacientes.nombres, pacientes.apellidos, pacientes.identificacion, pacientes.contacto, pacientes.direccion,
-    pagos.valor, pagos.fecha_pago, pagos.descripcion, pagos.id,
+    pagos.valor, pagos.fecha_pago, pagos.descripcion, pagos.id, pagos.estado,
     citas.fecha, citas.ingreso, citas.salida
     FROM pagos
     JOIN pagos_pacientes
@@ -323,15 +323,18 @@ def detalle_facturas(id):
     data = cursor.fetchall()
     cursor.close()
     date = data[0][6].strftime("%Y-%m-%d")
-    appointment_date = data[0][9].strftime("%Y-%m-%d")
+    appointment_date = data[0][10].strftime("%Y-%m-%d")
+    ## para poder mostrar la hora, mirar luego
     """ start = data[0][10].strftime("%H:%M:%S")
     end = data[0][11].strftime("%H:%M:%S") """
-    start = str(data[0][10])
-    end = str(data[0][11])
+    start = str(data[0][11])
+    end = str(data[0][12])
     amount = "{:,.2f}".format(data[0][5])
     amount_iva = float(data[0][5] * 0.19)
     iva = "{:,.2f}".format(amount_iva)
     total = "{:,.2f}".format(float(data[0][5]) + float(data[0][5] * 0.19))
+
+    print(data)
     return render_template(
         "bill-detail.html",
         all_data=data[0],

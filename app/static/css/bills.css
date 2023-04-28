@@ -169,7 +169,7 @@
 }
 
 #bill-footer {
-  margin: 60px 0 0;
+  margin: 30px 0 0;
   padding: 5px 0;
   background: var(--light-gray);
   text-align: center;
@@ -185,5 +185,14 @@
 }
 
 #bill-buttons * {
+  margin: 0 3px;
+}
+
+#pay-status {
+  background: var(--light-gray);
+  padding: 10px;
+}
+
+#pay-status * {
   margin: 0 3px;
 }

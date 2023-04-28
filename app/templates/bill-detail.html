@@ -269,6 +269,15 @@
     </div>
   </div>
 
+  <div class="d-flex" id="pay-status">
+    <h5>Estado factura:</h5>
+    {% if all_data[9] == 2 %}
+    <p>pendiente</p>
+    {% else %}
+    <p>pago</p>
+    {% endif %}
+  </div>
+
   <!-- footer -->
 
   <div class="container" id="bill-footer">
@@ -285,6 +294,8 @@
     </div>
   </div>
 </div>
+
+<!-- paid button -->
 
 <!-- buttons -->
 <div class="d-flex justify-content-center" id="bill-buttons">
