@@ -49,7 +49,7 @@
       id="bill-number"
     >
       <h4><strong>Factura no.</strong></h4>
-      <h5>{{all_data[8]}}</h5>
+      <h5>{{all_data[9]}}</h5>
     </div>
   </div>
 
@@ -278,7 +278,7 @@
 
   <div class="d-flex" id="pay-status">
     <h5>Estado factura:</h5>
-    {% if all_data[9] == 2 %}
+    {% if all_data[10] == 2 %}
     <p>pendiente</p>
     {% else %}
     <p>pago</p>
@@ -303,9 +303,9 @@
 </div>
 
 <!-- paid button -->
-{% if all_data[9] == 2 %}
+{% if all_data[10] == 2 %}
 <div class="d-flex justify-content-center">
-  <a href="/pagar_factura/{{all_data[8]}}"
+  <a href="/pagar_factura/{{all_data[9]}}"
     ><button type="button" id="change-paid-button">Factura paga</button></a
   >
 </div>

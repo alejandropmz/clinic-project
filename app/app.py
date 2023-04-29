@@ -27,10 +27,16 @@ def pacientes():
 
     # appointments
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM citas")
+    cursor.execute("""
+    SELECT pacientes.id, citas.id, citas.razon, citas.estado
+    FROM citas
+    JOIN pacientes
+    ON pacientes.id = citas.paciente
+    """)
     appointments = cursor.fetchall()
     cursor.close()
     print(appointments)
+    print(patients[0])
     return render_template(
         "patients.html", patients=patients, appointments=appointments
     )
@@ -137,7 +143,6 @@ def citas():
     )
     all_data = cursor.fetchall()
     cursor.close()
-    print(all_data)
     return render_template("appointments.html", appointments=all_data)
 
 
@@ -285,7 +290,7 @@ def facturas():
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
-    SELECT pacientes.nombres, pacientes.apellidos, pagos.id, pagos.fecha_pago, pagos.valor, pagos.estado
+    SELECT DISTINCT pacientes.nombres, pacientes.apellidos, pagos.id, pagos.fecha_pago, pagos.valor, pagos.estado
     FROM pagos_pacientes
     JOIN pacientes
     ON pagos_pacientes.id_paciente = pacientes.id
@@ -297,7 +302,6 @@ def facturas():
     )
     data = cursor.fetchall()
     cursor.close()
-    print(data)
     return render_template("bills.html", bills=data)
 
 
@@ -334,7 +338,6 @@ def detalle_facturas(id):
     iva = "{:,.2f}".format(amount_iva)
     total = "{:,.2f}".format(float(data[0][5]) + float(data[0][5] * 0.19))
 
-    print(data)
     return render_template(
         "bill-detail.html",
         all_data=data[0],
@@ -413,7 +416,6 @@ def guardar_factura():
     )
     mysql.connection.commit()
     cursor.close()
-    print(data)
     return jsonify({"redirect_url": "facturas"})
 
 

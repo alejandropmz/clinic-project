@@ -112,19 +112,6 @@
           });
         });
 
-        /* For the resumen bill */
-        /* document.addEventListener("DOMContentLoaded", function () {
-          const totalCostResumen =
-            document.getElementById("total-cost-resumen");
-          const priceInWordsResumen = document.getElementById(
-            "price-in-words-resumen"
-          );
-
-          const writtenNumber = require("written-number");
-          console.log(typeof(totalCostResumen.value));
-          priceInWordsResumen.value = writtenNumber(totalCostResumen.value);
-        }); */
-
         /* send forms data */
 
         document.addEventListener("DOMContentLoaded", function () {

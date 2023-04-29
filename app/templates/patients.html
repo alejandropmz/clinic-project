@@ -78,13 +78,13 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {% if appointments %} {% for appointment in appointments %} {% if
-            appointment[4] in patient %} {% if appointment[6] == 1 %}
+            appointment[0] in patient and appointment[3] == 1 %}
             <li>
               <a class="dropdown-item" href="/citas/{{appointment[0]}}"
-                >{{appointment[5]}}</a
+                >{{appointment[2]}}</a
               >
             </li>
-            {% endif %} {% endif %} {% endfor %} {% endif %}
+            {% endif %} {% endfor %} {% endif %}
           </ul>
         </div>
         {% else %}
