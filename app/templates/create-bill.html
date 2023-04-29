@@ -210,13 +210,27 @@
       <div id="lyric">
         <p><strong>Valor en letras</strong></p>
         <form id="lyric-amount" action="">
-          <input readonly value="" name="lyric-amount" type="text" id="price-in-words" />
+          <input
+            readonly
+            value=""
+            name="lyric-amount"
+            type="text"
+            id="price-in-words"
+          />
         </form>
       </div>
       <div>
         <p><strong>Observaciones</strong></p>
         <form id="observations" action="">
           <input placeholder="Observaciones" name="observations" type="text" />
+        </form>
+      </div>
+      <div id="checkbox">
+        <form id="pay-check" action="">
+          <input type="checkbox" name="pay-check" /><small>
+            Marcar como paga</small
+          >
+          <input type="hidden" name="pay-check" value="false">
         </form>
       </div>
     </div>

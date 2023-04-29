@@ -27,12 +27,14 @@ def pacientes():
 
     # appointments
     cursor = mysql.connection.cursor()
-    cursor.execute("""
+    cursor.execute(
+        """
     SELECT pacientes.id, citas.id, citas.razon, citas.estado
     FROM citas
     JOIN pacientes
     ON pacientes.id = citas.paciente
-    """)
+    """
+    )
     appointments = cursor.fetchall()
     cursor.close()
     print(appointments)
@@ -390,6 +392,11 @@ def guardar_factura():
     # fetchone para traer un solo registro y optimizar el código
     appointment_id = cursor.fetchone()[0]
 
+    if data["pay-check"] == "on":
+        pay_status = 1
+    else:
+        pay_status = 2
+
     ## guardar la info de los forms en la base de datos del pago
     cursor.execute(
         """
@@ -400,7 +407,7 @@ def guardar_factura():
             data["appointment-cost"],
             data["lyric-amount"],
             data["appointment-description"],
-            2,
+            pay_status,
             data["observations"],
             appointment_id,
         ),

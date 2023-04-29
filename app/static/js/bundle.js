@@ -140,6 +140,8 @@
               document.getElementById("observations")
             );
 
+            const payCheck = new FormData(document.getElementById("pay-check"));
+
             fetch("/guardar_factura", {
               method: "POST",
               body: new URLSearchParams([
@@ -148,6 +150,7 @@
                 ...appoinmentPrices,
                 ...lyricAmount,
                 ...observations,
+                ...payCheck,
               ]),
             })
               .then(function (response) {

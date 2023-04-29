@@ -228,3 +228,7 @@
   background: var(--blue-hover);
   transition: all ease-in 0.3s;
 }
+
+#checkbox {
+  padding: 10px;
+}
