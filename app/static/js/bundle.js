@@ -68,6 +68,21 @@
           });
         });
 
+        document.addEventListener("DOMContentLoaded", function () {
+          const cancelFormButton =
+            document.getElementById("cancel-form-button");
+          if (cancelFormButton == null) {
+            return "";
+          }
+
+          cancelFormButton.addEventListener("click", (e) => {
+            if (!confirm("¿Estás seguro de cancelar la cita?")) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          });
+        });
+
         /* For the dinamic cost in create bill */
         document.addEventListener("DOMContentLoaded", function () {
           const costInput = document.getElementById("cost-input");
