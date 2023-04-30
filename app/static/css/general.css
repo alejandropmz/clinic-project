@@ -313,6 +313,7 @@
 
 #delete-button,
 #cancel-button,
+#cancel-paid-button,
 #cancel-form-button {
   border: none;
   padding: 5px 10px;
@@ -321,8 +322,14 @@
   color: white;
 }
 
+#pay-notification * {
+  transition: all ease-in-out 0.3s;
+  margin-bottom: 20px;
+}
+
 #delete-button:hover,
 #cancel-button:hover,
+#cancel-paid-button:hover,
 #cancel-form-button:hover {
   background: var(--delete-red-hover);
   transition: all ease-in 0.3s;
@@ -334,6 +341,15 @@ select {
   width: 70%;
   border: none;
   text-align: center;
+}
+
+#pay-notification {
+  padding: 10px 0;
+
+}
+
+#pay-notification p {
+  margin: 0 0 0 5px;
 }
 
 /* media querys */
@@ -362,3 +378,4 @@ select {
     display: block;
   }
 }
+

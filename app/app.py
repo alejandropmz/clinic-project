@@ -170,16 +170,19 @@ def editar_cita(id):
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
-    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pacientes.contacto, pacientes.correo
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pacientes.contacto, pacientes.correo, pagos.estado
     FROM citas
     JOIN pacientes
     ON citas.paciente = pacientes.id
+    JOIN pagos
+    ON pagos.cita = citas.id
     WHERE citas.id = %s
     """,
         (id,),
     )
     appointment = cursor.fetchall()
     cursor.close()
+    print(appointment[0])
     return render_template("edit-appointment.html", appointment=appointment[0])
 
 

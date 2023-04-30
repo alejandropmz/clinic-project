@@ -75,7 +75,11 @@
     {% for appointment in appointments %}
     <tr>
       <td>
-        <p style="margin: 0">{{appointment[0]}}</p>
+        <p style="margin: 0">
+          {% if appointment[10] == 1 %} {{appointment[0]}} {% else %}
+          <i style="font-size: 1.2rem; color: red;" class="bi bi-x-circle"></i>
+          {% endif %}
+        </p>
       </td>
       <td>
         {{appointment[1].strftime('%Y-%m-%d').split('-')[2]}}/{{appointment[1].strftime('%Y-%m-%d').split('-')[1]}}/{{appointment[1].strftime('%Y-%m-%d').split('-')[0]}}
@@ -128,8 +132,7 @@
               Ver
             </button></a
           >
-          {% if appointment[10] == 2 %}
-          {% else %}
+          {% if appointment[10] == 2 %} {% else %}
           <a href="/editar_cita/{{appointment[0]}}"
             ><button type="button">
               <i class="bi bi-pencil-square"></i>

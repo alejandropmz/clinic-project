@@ -112,6 +112,29 @@
           });
         });
 
+        /* it's can't delete not paid appointment */
+        document.addEventListener("DOMContentLoaded", function () {
+          const detailContainer = document.getElementsByClassName(
+            "detail-info-container"
+          );
+          if (detailContainer == null) {
+            return "";
+          }
+          document
+            .getElementById("cancel-paid-button")
+            .addEventListener("click", function () {
+              document.getElementById("cancel-paid-button").remove();
+              detailContainer[0].style.margin = 0;
+
+              const payNotification = document.createElement("div");
+              payNotification.id = "pay-notification";
+              payNotification.classList.add("d-flex", "justify-content-center");
+              payNotification.innerHTML = `<i class="bi bi-exclamation-circle"></i>
+              <p>Solo puedes eliminar facturas que aún no estén pagas</p>`;
+              document.body.appendChild(payNotification);
+            });
+        });
+
         /* send forms data */
 
         document.addEventListener("DOMContentLoaded", function () {

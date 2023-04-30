@@ -91,9 +91,13 @@
       <button type="submit" id="save-button">Modificar</button>
     </div>
     <div>
+      {% if appointment[11] == 2 %}
       <a href="/eliminar_cita/{{appointment[0]}}"
         ><button type="button" id="cancel-button">Cancelar cita</button></a
       >
+      {% else %}
+      <button type="button" id="cancel-paid-button">Cancelar cita</button>
+      {% endif %}
     </div>
   </form>
 </div>
