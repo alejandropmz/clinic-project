@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, session
 from flask_mysqldb import MySQL
 import datetime
 
@@ -12,16 +12,14 @@ app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "123456"
 app.config["MYSQL_DB"] = "clinic"
 
+app.config["SECRET_KEY"] = "my_secret_key"
+
 
 @app.route("/")
-def index():
-    return redirect(url_for("pacientes"))
-
-
 @app.route("/pacientes")
 def pacientes():
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM pacientes")
+    cursor.execute("SELECT * FROM pacientes WHERE is_active = %s", (1,))
     patients = cursor.fetchall()
     cursor.close()
 
@@ -31,14 +29,14 @@ def pacientes():
         """
     SELECT pacientes.id, citas.id, citas.razon, citas.estado
     FROM citas
-    JOIN pacientes
+    JOIN pacientes 
     ON pacientes.id = citas.paciente
-    """
+    WHERE is_active = %s
+    """,
+        (1,),
     )
     appointments = cursor.fetchall()
     cursor.close()
-    print(appointments)
-    print(patients[0])
     return render_template(
         "patients.html", patients=patients, appointments=appointments
     )
@@ -106,10 +104,10 @@ def crear_paciente():
     cursor.execute(
         """
     INSERT INTO pacientes
-    (identificacion, nombres, apellidos, nacimiento, contacto, correo, direccion)
-    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    (identificacion, nombres, apellidos, nacimiento, contacto, correo, direccion, is_active)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
     """,
-        (ident, first_names, last_names, birth_date, contact, email, address),
+        (ident, first_names, last_names, birth_date, contact, email, address, 1),
     )
     mysql.connection.commit()
     cursor.close()
@@ -119,9 +117,8 @@ def crear_paciente():
 @app.route("/eliminar_paciente/<int:id>")
 def eliminar_paciente(id):
     cursor = mysql.connection.cursor()
-    # patient appointments
-    cursor.execute("DELETE FROM citas WHERE paciente = %s", (id,))
-    cursor.execute("DELETE FROM pacientes WHERE id = %s", (id,))
+    # update patient for keep information
+    cursor.execute("UPDATE pacientes SET is_active = %s WHERE id = %s", (2, id))
     mysql.connection.commit()
     cursor.close()
     return redirect(url_for("pacientes"))
@@ -135,16 +132,17 @@ def citas():
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
-    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pagos.estado
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pagos.estado, pacientes.is_active
     FROM citas
     JOIN pacientes
     ON citas.paciente = pacientes.id
     JOIN pagos
     ON pagos.cita = citas.id
-    """
+    """,
     )
     all_data = cursor.fetchall()
     cursor.close()
+    print(all_data)
     return render_template("appointments.html", appointments=all_data)
 
 
@@ -153,7 +151,7 @@ def detalle_cita(id):
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
-    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pacientes.contacto, pacientes.correo
+    SELECT citas.*, pacientes.nombres, pacientes.apellidos, pacientes.contacto, pacientes.correo, pacientes.is_active
     FROM citas
     JOIN pacientes
     ON citas.paciente = pacientes.id
@@ -163,6 +161,7 @@ def detalle_cita(id):
     )
     appointment = cursor.fetchall()
     cursor.close()
+    print(appointment)
     return render_template("appointment-detail.html", appointment=appointment[0])
 
 
@@ -216,39 +215,42 @@ def crear_cita():
         cursor.close()
         return render_template("create-appointment.html", patients=patients)
 
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM pacientes")
-    patient = cursor.fetchall()
-    cursor.close()
     date = request.form["date"]
     start = request.form["start"]
     end = request.form["end"]
     reason = request.form["reason"]
     patient = request.form["patient"]
     cursor = mysql.connection.cursor()
-    cursor.execute(
-        """
-    INSERT INTO citas
-    (fecha, ingreso, salida, razon, paciente, estado)
-    VALUES (%s, %s, %s, %s, %s, %s)
-    """,
-        (date, start, end, reason, patient, 1),
-    )
-    mysql.connection.commit()
+
+    ## i pass this information for create the appointment after have ready the bill
+    ## then i receive this information in '/crear_factura' endpoint
+
+    session["appointmentData"] = {
+        "date": date,
+        "start": start,
+        "end": end,
+        "reason": reason,
+        "patient": patient,
+    }
 
     cursor.execute(
         """
-    SELECT pacientes.*, citas.fecha, citas.ingreso, citas.salida, citas.razon
-    FROM pacientes
-    JOIN citas
-    ON pacientes.id = citas.paciente
-    WHERE pacientes.id = %s
+    SELECT * FROM pacientes
+    WHERE id = %s
     """,
         (patient),
     )
     patient_info = cursor.fetchall()
+    mysql.connection.commit()
     cursor.close()
-    return render_template("create-bill.html", patient=patient_info[0])
+    return render_template(
+        "create-bill.html",
+        patient=patient_info[0],
+        date=date,
+        start=start,
+        end=end,
+        reason=reason,
+    )
 
 
 @app.route("/eliminar_cita/<int:id>")
@@ -382,15 +384,26 @@ def guardar_factura():
     # fetchone para traer un solo registro y optimizar el código
     patient_id = cursor.fetchone()[0]
 
-    ## buscar la cita exacta del paciente para la factura
+    appointmentData = session.get("appointmentData")
+
+    # Guardamos la información de la cita al momento de generar la factura
     cursor.execute(
         """
-    SELECT id FROM citas WHERE paciente = %s AND fecha = %s AND ingreso = %s AND salida = %s
+    INSERT INTO citas
+    (fecha, ingreso, salida, razon, paciente, estado)
+    VALUES (%s, %s, %s, %s, %s, %s)
     """,
-        (patient_id, data["date"], data["start"], data["end"]),
+        (
+            appointmentData["date"],
+            appointmentData["start"],
+            appointmentData["end"],
+            appointmentData["reason"],
+            appointmentData["patient"],
+            1,
+        ),
     )
-    # fetchone para traer un solo registro y optimizar el código
-    appointment_id = cursor.fetchone()[0]
+
+    appointment_id = cursor.lastrowid
 
     if data["pay-check"] == "on":
         pay_status = 1
@@ -421,6 +434,8 @@ def guardar_factura():
         "INSERT INTO pagos_pacientes (id_pago, id_paciente) VALUES (%s, %s)",
         (paid_id, patient_id),
     )
+
+    
     mysql.connection.commit()
     cursor.close()
     return jsonify({"redirect_url": "facturas"})

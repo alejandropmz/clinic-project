@@ -14,13 +14,18 @@
 <!-- Render information -->
 
 <div class="detail-info-container">
+  {% if appointment[11] == 2 %}
+  <div id="deleted-patient">
+    <p><small>Este paciente ya no hace parte del sistema</small></p>
+  </div>
+  {% endif %}
   <h3>{{appointment[7].title()}} {{appointment[8].title()}}</h3>
 
   <form class="d-flex flex-column">
     <label for="patient">
       <div>
         <span>Paciente</span>
-        <input value="{{appointment[1]}}" readonly type="text" name="patient" />
+        <input value="{{appointment[7].title()}} {{appointment[8].title()}}" readonly type="text" name="patient" />
       </div>
     </label>
     <label for="date">

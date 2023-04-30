@@ -23,9 +23,12 @@
         <select name="patient">
           <option disabled selected>Seleccione el paciente</option>
           {% if patients %} {% for patient in patients %}
+          {% if patient[8] == 2 %}
+          {% else %}
           <option value="{{patient[0]}}">
             {{patient[2].title()}} {{patient[3].title()}}
           </option>
+          {% endif %}
           {% endfor %} {% endif %}
         </select>
       </div>

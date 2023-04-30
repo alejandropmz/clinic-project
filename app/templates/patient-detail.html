@@ -6,7 +6,11 @@
   <div class="col-sm-12 col-md-6">
     <i class="bx bx-user"></i>
     <div class="detail">
+      {% if patient[8] == 2 %}
+      <h4>Paciente eliminado</h4>
+      {% else %}
       <h4>Información del paciente</h4>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -14,6 +18,11 @@
 <!-- Render information -->
 
 <div class="detail-info-container">
+  {% if patient[8] == 2 %}
+  <div id="deleted-patient">
+    <p><small>Este paciente ya no hace parte del sistema</small></p>
+  </div>
+  {% endif %}
   <h3>{{patient[2].title()}} {{patient[3].title()}}</h3>
 
   <form class="d-flex flex-column">
@@ -93,9 +102,13 @@
       <a href="/pacientes"
         ><button type="button" id="back-button">Atrás</button></a
       >
+      {% if patient[8] == 2 %}
+      {% else %}
       <a href="/editar_paciente/{{patient[0]}}">
         <button type="button" id="modify-button">Modificar</button>
       </a>
+      {% endif %}
+
     </div>
   </form>
 </div>
