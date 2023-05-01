@@ -14,7 +14,7 @@
       ><button class="select-button">Pacientes</button></a
     >
     <a href="/historial/citas"><button class="select-button">Citas</button></a>
-    <a href="/historial/facturas"
+    <a href="/historial/pagos"
       ><button class="select-button">Facturas</button></a
     >
   </div>
@@ -29,59 +29,80 @@
 <!-- Render information -->
 
 <div id="forms" class="f-flex justify-content-center">
+  {% if data %}
   <table>
     <tr>
-      <th id="photo">No.</th>
-      <th id="min-width">Fecha</th>
-      <th id="min-width">Inicio</th>
-      <th id="min-width">Fin</th>
-      <th>Paciente</th>
-      <th>Razón de cita</th>
-      <th>Estado</th>
-      <th>Pago</th>
+      <th id="photo">Foto</th>
+      <th>Nombre</th>
+      <th>Nacimiento</th>
+      <th>Consultas</th>
+      <th>Registro</th>
+      <th>Eliminación</th>
       <th>Acciones</th>
     </tr>
+    {% for date in data %}
     <tr>
-      <td>1</td>
-      <td>fecha</td>
-      <td>Inicio</td>
-      <td>fin</td>
-      <td>paciente</td>
-      <td>razon</td>
       <td>
+        {% if date[8] == 2 %}
+        <i style="font-size: 1.6rem; color: red;" class="bi bi-x-circle"></i>
+        {% else %}
+        <img
+          id="form-photo"
+          src="https://affinitaslegal.com/wp-content/uploads/2020/08/imagen-perfil-sin-foto.jpg"
+          alt=""
+        />
+        {% endif %}
+      </td>
+      <td>{{date[2].title()}} {{date[3].title()}}</td>
+      <td>{{date[4].split("-")[2]}}/{{date[4].split("-")[1]}}/{{date[4].split("-")[0]}}</td>
+      <td>
+        <a href="#"
+          ><button type="button" id="add-appointment-patient">
+            Historial de consultas
+          </button></a
+        >
+      </td>
+      <td>{{date[9].date().strftime("%Y-%m-%d").split("-")[2]}}/{{date[9].date().strftime("%Y-%m-%d").split("-")[1]}}/{{date[9].date().strftime("%Y-%m-%d").split("-")[0]}}</td>
+      <td>{% if date[10] %}
+        {{date[10].date().strftime("%Y-%m-%d").split("-")[2]}}/{{date[10].date().strftime("%Y-%m-%d").split("-")[1]}}/{{date[10].date().strftime("%Y-%m-%d").split("-")[0]}}
+        {% else %}
         <div
           id="approve-dot"
           class="d-flex justify-content-center align-items-center"
         >
-          <i class="bi bi-dot"></i><span>Aprobada</span>
+          <i class="bi bi-dot"></i><span>Activo</span>
         </div>
-      </td>
-      <td>
-        <div
-          id="pending-dot"
-          class="d-flex justify-content-center align-items-center"
-        >
-          <i class="bi bi-dot"></i><span>Pendiente</span>
-        </div>
+        {% endif %}
       </td>
       <td>
         <div class="options-buttons">
           <a href="#"
-            ><button>
+            ><button type="button">
               <i class="bi bi-eye"></i>
               Ver
             </button></a
           >
-          <a href="#"
-            ><button type="button">
+          {% if date[8] == 1 %}
+          <a href="#">
+            <button>
               <i class="bi bi-pencil-square"></i>
               Modificar
-            </button></a
-          >
+            </button>
+          </a>
+          {% else %}
+          {% endif %}
         </div>
       </td>
     </tr>
+    {% endfor %}
+    {% else %}
+    <div class="d-flex justify-content-center detail-info-container">
+      <div class="d-flex justify-content-center" id="options-container">
+
+      </div>
+    </div>
   </table>
+  {% endif %}
 </div>
 
 {% endblock %}

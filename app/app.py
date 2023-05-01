@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify, session
 from flask_mysqldb import MySQL
 from datetime import datetime
- 
+
 
 app = Flask(__name__)
 
@@ -458,6 +458,13 @@ def historial():
 
 @app.route("/historial/<string:element>")
 def historial_detalles(element):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM {}".format(element))
+    data = cursor.fetchall()
+    cursor.close()
+    print(data)
+    if element == "pacientes":
+        return render_template("all_list.html", data=data)
     return "Welcome to " + element + " section"
 
 
