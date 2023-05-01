@@ -1,0 +1,87 @@
+{% extends 'layout.html' %} {% block body %}
+
+<!-- sub-nav -->
+
+<div class="row container-fluid sub-nav d-flex justify-content-between">
+  <div class="col-sm-12 col-md-4">
+    <i class="bx bx-list-ol"></i>
+    <div class="detail">
+      <h4>Historial de registros</h4>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center col-sm-12 col-md-4">
+    <a href="/historial/pacientes"
+      ><button class="select-button">Pacientes</button></a
+    >
+    <a href="/historial/citas"><button class="select-button">Citas</button></a>
+    <a href="/historial/facturas"
+      ><button class="select-button">Facturas</button></a
+    >
+  </div>
+  <div class="col-sm-12 col-md-4">
+    <form action="">
+      <input type="text" placeholder="Buscar" />
+      <button>Buscar</button>
+    </form>
+  </div>
+</div>
+
+<!-- Render information -->
+
+<div id="forms" class="f-flex justify-content-center">
+  <table>
+    <tr>
+      <th id="photo">No.</th>
+      <th id="min-width">Fecha</th>
+      <th id="min-width">Inicio</th>
+      <th id="min-width">Fin</th>
+      <th>Paciente</th>
+      <th>Razón de cita</th>
+      <th>Estado</th>
+      <th>Pago</th>
+      <th>Acciones</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>fecha</td>
+      <td>Inicio</td>
+      <td>fin</td>
+      <td>paciente</td>
+      <td>razon</td>
+      <td>
+        <div
+          id="approve-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Aprobada</span>
+        </div>
+      </td>
+      <td>
+        <div
+          id="pending-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Pendiente</span>
+        </div>
+      </td>
+      <td>
+        <div class="options-buttons">
+          <a href="#"
+            ><button>
+              <i class="bi bi-eye"></i>
+              Ver
+            </button></a
+          >
+          <a href="#"
+            ><button type="button">
+              <i class="bi bi-pencil-square"></i>
+              Modificar
+            </button></a
+          >
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify, session
 from flask_mysqldb import MySQL
-import datetime
-
+from datetime import datetime
+ 
 
 app = Flask(__name__)
 
@@ -37,6 +37,7 @@ def pacientes():
     )
     appointments = cursor.fetchall()
     cursor.close()
+    print(appointments[0])
     return render_template(
         "patients.html", patients=patients, appointments=appointments
     )
@@ -118,7 +119,11 @@ def crear_paciente():
 def eliminar_paciente(id):
     cursor = mysql.connection.cursor()
     # update patient for keep information
-    cursor.execute("UPDATE pacientes SET is_active = %s WHERE id = %s", (2, id))
+    delete = datetime.now()
+    cursor.execute(
+        "UPDATE pacientes SET is_active = %s, eliminacion = %s WHERE id = %s",
+        (2, delete, id),
+    )
     mysql.connection.commit()
     cursor.close()
     return redirect(url_for("pacientes"))
@@ -438,10 +443,22 @@ def guardar_factura():
         (paid_id, patient_id),
     )
 
-    
     mysql.connection.commit()
     cursor.close()
     return jsonify({"redirect_url": "facturas"})
+
+
+""" TODA LA LISTA """
+
+
+@app.route("/historial")
+def historial():
+    return render_template("all_list.html")
+
+
+@app.route("/historial/<string:element>")
+def historial_detalles(element):
+    return "Welcome to " + element + " section"
 
 
 if __name__ == "__main__":

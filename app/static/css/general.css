@@ -11,7 +11,8 @@
   align-items: center;
 }
 
-.sub-nav div form button {
+.sub-nav div form button,
+.select-button {
   border: none;
   padding: 4px;
   background: var(--buttons-blue);
@@ -19,9 +20,15 @@
   border-radius: 2px;
 }
 
-.sub-nav div form button:hover {
+.sub-nav div form button:hover,
+.select-button:hover {
   background: var(--buttons-blue-hover);
   transition: all ease-in 0.3s;
+}
+
+.select-button {
+  margin: 0 2px;
+  padding: 4px 6px;
 }
 
 .sub-nav i {
@@ -345,7 +352,6 @@ select {
 
 #pay-notification {
   padding: 10px 0;
-
 }
 
 #pay-notification p {
@@ -364,6 +370,11 @@ select {
   .options-bar .pagination {
     justify-content: end;
   }
+
+  .sub-nav div:nth-child(3),
+  .options-bar .pagination {
+    justify-content: end;
+  }
 }
 
 @media screen and (max-width: 786px) {
@@ -378,4 +389,3 @@ select {
     display: block;
   }
 }
-
