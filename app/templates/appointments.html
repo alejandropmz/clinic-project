@@ -108,6 +108,14 @@
       </td>
       {% endif %}
       <td>
+        {% if appointment[6] == 2 %}
+        <div
+          id="cancel-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Cita cancelada</span>
+        </div>
+        {% else %}
         {% if appointment[9] == 2 %}
         <div
           id="pending-dot"
@@ -122,6 +130,7 @@
         >
           <i class="bi bi-dot"></i><span>Pago</span>
         </div>
+        {% endif %}
         {% endif %}
       </td>
       <td>

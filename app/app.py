@@ -467,7 +467,7 @@ def historial_detalles(element):
     
     elif element == "citas":
         cursor.execute("""
-        SELECT citas.*, pacientes.nombres, pacientes.apellidos, pagos.estado, pacientes.is_active
+        SELECT citas.*, pacientes.nombres, pacientes.apellidos, pagos.estado, pacientes.is_active, pagos.fecha_pago
         FROM pacientes
         JOIN citas
         ON citas.paciente = pacientes.id
