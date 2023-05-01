@@ -358,6 +358,43 @@ select {
   margin: 0 0 0 5px;
 }
 
+/* historial */
+
+#options-container {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#options-container a {
+  text-decoration: none;
+  margin: 0 2px;
+}
+
+#options-container a div {
+  display: flex;
+  border-radius: 2px;
+  background: var(--buttons-blue);
+  color: white;
+  padding: 20px;
+}
+
+#options-container div:hover {
+  transition: all ease-in 0.3s;
+  background: var(--buttons-blue-hover);
+}
+
+#options-container div * {
+  margin: 0;
+  font-size: 2rem;
+}
+
+#options-container div i {
+  font-size: 2.5rem;
+  margin-right: 2px;
+}
+
 /* media querys */
 
 @media screen and (min-width: 768px) {
