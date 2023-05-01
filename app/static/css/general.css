@@ -383,6 +383,7 @@ select {
 #options-container div:hover {
   transition: all ease-in 0.3s;
   background: var(--buttons-blue-hover);
+  font-size: 1.2rem;
 }
 
 #options-container div * {

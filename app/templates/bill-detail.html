@@ -278,10 +278,14 @@
 
   <div class="d-flex" id="pay-status">
     <h5>Estado factura:</h5>
-    {% if all_data[10] == 2 %}
-    <p>pendiente</p>
+    {% if all_data[15] == 1 %}
+      {% if all_data[10] == 2 %}
+        <p>pendiente</p>
+      {% else %}
+        <p>pago</p>
+      {% endif %}
     {% else %}
-    <p>pago</p>
+    <p>Cita cancelada</p>
     {% endif %}
   </div>
 
@@ -303,13 +307,16 @@
 </div>
 
 <!-- paid button -->
-{% if all_data[10] == 2 %}
-<div class="d-flex justify-content-center">
-  <a href="/pagar_factura/{{all_data[9]}}"
-    ><button type="button" id="change-paid-button">Factura paga</button></a
-  >
-</div>
-{% else %} {% endif %}
+{% if all_data[15] == 1 %}
+  {% if all_data[10] == 2 %}
+  <div class="d-flex justify-content-center">
+    <a href="/pagar_factura/{{all_data[9]}}"
+      ><button type="button" id="change-paid-button">Factura paga</button></a
+    >
+  </div>
+  {% else %} {% endif %}
+{% else %}
+{% endif %}
 
 <!-- buttons -->
 <div class="d-flex justify-content-center" id="bill-buttons">

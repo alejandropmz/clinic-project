@@ -313,8 +313,31 @@ def facturas():
     """
     )
     data = cursor.fetchall()
+    cursor.execute(
+        """
+    SELECT citas.estado, pagos_pacientes.id_pago
+    FROM citas
+    JOIN pagos
+    ON pagos.cita = citas.id
+    JOIN pagos_pacientes
+    ON pagos_pacientes.id_pago = pagos.id
+    JOIN pacientes
+    ON pacientes.id = pagos_pacientes.id_paciente
+    """
+    )
+    appointment = cursor.fetchall()
     cursor.close()
-    return render_template("bills.html", bills=data)
+    for da in data:
+        print(da[2], end=", ")
+    print("")
+    print(appointment)
+    amount = data[0][4] + (data[0][4] * 0.19)
+    return render_template(
+        "bills.html",
+        bills=data,
+        amount=amount,
+        appointments=appointment
+    )
 
 
 @app.route("/facturas/<int:id>")
@@ -324,7 +347,7 @@ def detalle_facturas(id):
         """
     SELECT pacientes.nombres, pacientes.apellidos, pacientes.identificacion, pacientes.contacto, pacientes.direccion,
     pagos.valor, pagos.valor_en_letras, pagos.fecha_pago, pagos.descripcion, pagos.id, pagos.estado, pagos.observaciones,
-    citas.fecha, citas.ingreso, citas.salida
+    citas.fecha, citas.ingreso, citas.salida, citas.estado
     FROM pagos
     JOIN pagos_pacientes
     ON pagos_pacientes.id_pago = pagos.id
@@ -338,6 +361,7 @@ def detalle_facturas(id):
     )
     data = cursor.fetchall()
     cursor.close()
+    print(data[0])
     date = data[0][7].strftime("%Y-%m-%d")
     appointment_date = data[0][12].strftime("%Y-%m-%d")
     ## para poder mostrar la hora, mirar luego
@@ -464,19 +488,29 @@ def historial_detalles(element):
         data = cursor.fetchall()
         cursor.close()
         return render_template("all_list.html", patients=data)
-    
+
     elif element == "citas":
-        cursor.execute("""
+        cursor.execute(
+            """
         SELECT citas.*, pacientes.nombres, pacientes.apellidos, pagos.estado, pacientes.is_active, pagos.fecha_pago
         FROM pacientes
         JOIN citas
         ON citas.paciente = pacientes.id
         JOIN pagos
         ON pagos.cita = citas.id
-        """)
+        """
+        )
         data = cursor.fetchall()
         print(data)
         return render_template("all_list.html", appointments=data)
+
+    else:
+        cursor.execute(
+            """
+        SELECT
+        """
+        )
+
     return "Welcome to " + element + " section"
 
 
