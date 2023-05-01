@@ -459,12 +459,24 @@ def historial():
 @app.route("/historial/<string:element>")
 def historial_detalles(element):
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM {}".format(element))
-    data = cursor.fetchall()
-    cursor.close()
-    print(data)
     if element == "pacientes":
-        return render_template("all_list.html", data=data)
+        cursor.execute("SELECT * FROM pacientes")
+        data = cursor.fetchall()
+        cursor.close()
+        return render_template("all_list.html", patients=data)
+    
+    elif element == "citas":
+        cursor.execute("""
+        SELECT citas.*, pacientes.nombres, pacientes.apellidos, pagos.estado, pacientes.is_active
+        FROM pacientes
+        JOIN citas
+        ON citas.paciente = pacientes.id
+        JOIN pagos
+        ON pagos.cita = citas.id
+        """)
+        data = cursor.fetchall()
+        print(data)
+        return render_template("all_list.html", appointments=data)
     return "Welcome to " + element + " section"
 
 

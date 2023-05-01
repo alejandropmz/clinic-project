@@ -9,7 +9,7 @@
       <h4>Historial de registros</h4>
     </div>
   </div>
-  {% if data %}
+  {% if patients or appointments %}
   <div class="d-flex justify-content-center col-sm-12 col-md-4">
     <a href="/historial/pacientes"
       ><button class="select-button">Pacientes</button></a
@@ -19,8 +19,7 @@
       ><button class="select-button">Facturas</button></a
     >
   </div>
-  {% else %}
-  {% endif %}
+  {% else %} {% endif %}
   <div class="col-sm-12 col-md-4">
     <form action="">
       <input type="text" placeholder="Buscar" />
@@ -32,7 +31,7 @@
 <!-- Render information -->
 
 <div id="forms" class="f-flex justify-content-center">
-  {% if data %}
+  {% if patients %}
   <table>
     <tr>
       <th id="photo">Foto</th>
@@ -43,11 +42,11 @@
       <th>Eliminación</th>
       <th>Acciones</th>
     </tr>
-    {% for date in data %}
+    {% for patient in patients %}
     <tr>
       <td>
-        {% if date[8] == 2 %}
-        <i style="font-size: 1.6rem; color: red;" class="bi bi-x-circle"></i>
+        {% if patient[8] == 2 %}
+        <i style="font-size: 1.2rem; color: red" class="bi bi-x-circle"></i>
         {% else %}
         <img
           id="form-photo"
@@ -56,8 +55,10 @@
         />
         {% endif %}
       </td>
-      <td>{{date[2].title()}} {{date[3].title()}}</td>
-      <td>{{date[4].split("-")[2]}}/{{date[4].split("-")[1]}}/{{date[4].split("-")[0]}}</td>
+      <td>{{patient[2].title()}} {{patient[3].title()}}</td>
+      <td>
+        {{patient[4].split("-")[2]}}/{{patient[4].split("-")[1]}}/{{patient[4].split("-")[0]}}
+      </td>
       <td>
         <a href="#"
           ><button type="button" id="add-appointment-patient">
@@ -65,9 +66,12 @@
           </button></a
         >
       </td>
-      <td>{{date[9].date().strftime("%Y-%m-%d").split("-")[2]}}/{{date[9].date().strftime("%Y-%m-%d").split("-")[1]}}/{{date[9].date().strftime("%Y-%m-%d").split("-")[0]}}</td>
-      <td>{% if date[10] %}
-        {{date[10].date().strftime("%Y-%m-%d").split("-")[2]}}/{{date[10].date().strftime("%Y-%m-%d").split("-")[1]}}/{{date[10].date().strftime("%Y-%m-%d").split("-")[0]}}
+      <td>
+        {{patient[9].date().strftime("%Y-%m-%d").split("-")[2]}}/{{patient[9].date().strftime("%Y-%m-%d").split("-")[1]}}/{{patient[9].date().strftime("%Y-%m-%d").split("-")[0]}}
+      </td>
+      <td>
+        {% if patient[10] %}
+        {{patient[10].date().strftime("%Y-%m-%d").split("-")[2]}}/{{patient[10].date().strftime("%Y-%m-%d").split("-")[1]}}/{{patient[10].date().strftime("%Y-%m-%d").split("-")[0]}}
         {% else %}
         <div
           id="approve-dot"
@@ -85,37 +89,123 @@
               Ver
             </button></a
           >
-          {% if date[8] == 1 %}
+          {% if patient[8] == 1 %}
           <a href="#">
             <button>
               <i class="bi bi-pencil-square"></i>
               Modificar
             </button>
           </a>
-          {% else %}
-          {% endif %}
+          {% else %} {% endif %}
         </div>
       </td>
     </tr>
     {% endfor %}
+    
+    {% elif appointments %}
+    <table>
+      <tr>
+        <th id="photo">No.</th>
+        <th id="min-width">Fecha</th>
+        <th id="min-width">Inicio</th>
+        <th id="min-width">Fin</th>
+        <th>Paciente</th>
+        <th>Razón de cita</th>
+        <th>Estado</th>
+        <th>Pago</th>
+        <th>Acciones</th>
+      </tr>
+      {% for appointment in appointments %}
+      <tr>
+        <td>
+          {% if appointment[10] == 2 %}
+          <i style="font-size: 1.2rem; color: red;" class="bi bi-x-circle"></i>
+          {% else %}
+          {{appointment[0]}}
+          {% endif %}
+        </td>
+        <td>{{appointment[1].strftime("%Y-%m-%d")}}</td>
+        <td>{{appointment[2]}}</td>
+        <td>{{appointment[3]}}</td>
+        <td>{{appointment[7].title()}} {{appointment[8].title()}}</td>
+        <td>{{appointment[5].capitalize()}}</td>
+        <td>{% if appointment[6] %}
+          <div
+          id="approve-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Aprobada</span>
+        </div>
+        {% else %}
+        <div
+          id="cancel-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Cancelada</span>
+        </div>
+        {% endif %}
+        </td>
+        <td>
+          {% if appointment[9] == 1 %}
+          <div
+          id="approve-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Pago</span>
+        </div>
+          {% else %}
+          <div
+          id="pending-dot"
+          class="d-flex justify-content-center align-items-center"
+        >
+          <i class="bi bi-dot"></i><span>Pendiente</span>
+        </div>
+          {% endif %}
+        </td>
+        <td>
+          <div class="options-buttons">
+            <a href="#"
+              ><button>
+                <i class="bi bi-eye"></i>
+                Ver
+              </button></a
+            >
+            {% if appointment[10] == 2 %} {% else %}
+            <a href="#"
+              ><button type="button">
+                <i class="bi bi-pencil-square"></i>
+                Modificar
+              </button></a
+            >
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+
     {% else %}
     <div class="d-flex justify-content-center detail-info-container">
       <div id="options-container">
         <a href="/historial/pacientes">
           <div>
-          <i class='bx bx-male-female'></i>
-          <h5>Pacientes</h5>
-        </div></a>
+            <i class="bx bx-male-female"></i>
+            <h5>Pacientes</h5>
+          </div></a
+        >
         <a href="/historial/citas">
           <div>
-          <i class='bx bx-calendar-check'></i>
-          <h5>Citas</h5>
-        </div></a>
+            <i class="bx bx-calendar-check"></i>
+            <h5>Citas</h5>
+          </div></a
+        >
         <a href="/historial/pagos">
           <div>
-          <i class='bx bxs-calendar-week'></i>
-          <h5>Facturas</h5>
-        </div></a>
+            <i class="bx bxs-calendar-week"></i>
+            <h5>Facturas</h5>
+          </div></a
+        >
       </div>
     </div>
   </table>
