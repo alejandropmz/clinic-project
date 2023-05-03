@@ -37,7 +37,6 @@ def pacientes():
     )
     appointments = cursor.fetchall()
     cursor.close()
-    print(appointments[0])
     return render_template(
         "patients.html", patients=patients, appointments=appointments
     )
@@ -147,7 +146,6 @@ def citas():
     )
     all_data = cursor.fetchall()
     cursor.close()
-    print(all_data)
     return render_template("appointments.html", appointments=all_data)
 
 
@@ -166,7 +164,6 @@ def detalle_cita(id):
     )
     appointment = cursor.fetchall()
     cursor.close()
-    print(appointment)
     return render_template("appointment-detail.html", appointment=appointment[0])
 
 
@@ -187,7 +184,6 @@ def editar_cita(id):
     )
     appointment = cursor.fetchall()
     cursor.close()
-    print(appointment[0])
     return render_template("edit-appointment.html", appointment=appointment[0])
 
 
@@ -302,7 +298,7 @@ def facturas():
     cursor = mysql.connection.cursor()
     cursor.execute(
         """
-    SELECT DISTINCT pacientes.nombres, pacientes.apellidos, pagos.id, pagos.fecha_pago, pagos.valor, pagos.estado
+    SELECT DISTINCT pacientes.nombres, pacientes.apellidos, pagos.id, pagos.fecha_pago, pagos.valor, pagos.estado, pacientes.is_active
     FROM pagos_pacientes
     JOIN pacientes
     ON pagos_pacientes.id_paciente = pacientes.id
@@ -327,17 +323,7 @@ def facturas():
     )
     appointment = cursor.fetchall()
     cursor.close()
-    for da in data:
-        print(da[2], end=", ")
-    print("")
-    print(appointment)
-    amount = data[0][4] + (data[0][4] * 0.19)
-    return render_template(
-        "bills.html",
-        bills=data,
-        amount=amount,
-        appointments=appointment
-    )
+    return render_template("bills.html", bills=data, appointments=appointment)
 
 
 @app.route("/facturas/<int:id>")
@@ -361,7 +347,6 @@ def detalle_facturas(id):
     )
     data = cursor.fetchall()
     cursor.close()
-    print(data[0])
     date = data[0][7].strftime("%Y-%m-%d")
     appointment_date = data[0][12].strftime("%Y-%m-%d")
     ## para poder mostrar la hora, mirar luego
@@ -483,11 +468,13 @@ def historial():
 @app.route("/historial/<string:element>")
 def historial_detalles(element):
     cursor = mysql.connection.cursor()
+
     if element == "pacientes":
         cursor.execute("SELECT * FROM pacientes")
         data = cursor.fetchall()
         cursor.close()
-        return render_template("all_list.html", patients=data)
+        print(data)
+        return render_template("all_list.html", patients=data, element=element)
 
     elif element == "citas":
         cursor.execute(
@@ -501,17 +488,38 @@ def historial_detalles(element):
         """
         )
         data = cursor.fetchall()
-        print(data)
-        return render_template("all_list.html", appointments=data)
+        return render_template("all_list.html", appointments=data, element=element)
 
-    else:
+    elif element == "pagos":
         cursor.execute(
             """
-        SELECT
+        SELECT DISTINCT pacientes.nombres, pacientes.apellidos, pagos.id, pagos.fecha_pago, pagos.valor, pagos.estado, pacientes.is_active
+        FROM pagos_pacientes
+        JOIN pacientes
+        ON pagos_pacientes.id_paciente = pacientes.id
+        JOIN citas
+        ON pacientes.id = citas.paciente
+        JOIN pagos
+        ON pagos.id = pagos_pacientes.id_pago 
         """
         )
-
-    return "Welcome to " + element + " section"
+        data = cursor.fetchall()
+        cursor.execute(
+            """
+        SELECT citas.estado, pagos_pacientes.id_pago
+        FROM citas
+        JOIN pagos
+        ON pagos.cita = citas.id
+        JOIN pagos_pacientes
+        ON pagos_pacientes.id_pago = pagos.id
+        JOIN pacientes
+        ON pacientes.id = pagos_pacientes.id_paciente
+        """
+        )
+        appointment = cursor.fetchall()
+        cursor.close()
+        print(appointment)
+        return render_template("all_list.html", bills=data, bills_appointments=appointment, element=element)
 
 
 if __name__ == "__main__":

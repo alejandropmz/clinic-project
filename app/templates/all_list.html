@@ -9,7 +9,7 @@
       <h4>Historial de registros</h4>
     </div>
   </div>
-  {% if patients or appointments %}
+  {% if patients or appointments or bills  %}
   <div class="d-flex justify-content-center col-sm-12 col-md-4">
     <a href="/historial/pacientes"
       ><button class="select-button">Pacientes</button></a
@@ -31,7 +31,7 @@
 <!-- Render information -->
 
 <div id="forms" class="f-flex justify-content-center">
-  {% if patients %}
+  {% if element == "pacientes" %}
   <table>
     <tr>
       <th id="photo">Foto</th>
@@ -102,7 +102,7 @@
     </tr>
     {% endfor %}
     
-    {% elif appointments %}
+    {% elif element == "citas" %}
     <table>
       <tr>
         <th id="photo">No.</th>
@@ -195,7 +195,78 @@
       </tr>
       {% endfor %}
     </table>
-    
+
+    {% elif element == "pagos" %}
+    <table>
+      <tr>
+        <th id="photo">No.</th>
+        <th>Nombre</th>
+        <th>Fecha de facturación</th>
+        <th>Valor</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+      {% for bill in bills %}
+      <tr>
+        <td>
+          {% if bill[6] == 1 %}
+            {{bill[2]}}
+          {% else %}
+          <i style="font-size: 1.2rem; color: red;" class="bi bi-x-circle"></i>
+          {% endif %}
+        </td>
+        <td>{{bill[0].title()}} {{bill[1].title()}}</td>
+        <td>
+          {{bill[3].strftime("%Y-%m-%d").split("-")[2]}}/{{bill[3].strftime("%Y-%m-%d").split("-")[1]}}/{{bill[3].strftime("%Y-%m-%d").split("-")[0]}}
+        </td>
+        <td>${{"{:,.2f}".format(bill[4]+bill[4]*0.19)}}</td>
+        <td>
+          {% if bill[5] == 1 %}
+            <div
+              id="approve-dot"
+              class="d-flex justify-content-center align-items-center"
+            >
+              <i class="bi bi-dot"></i><span>Pagada</span>
+            </div>
+            {% else %}
+            {% for status in bills_appointments %}
+              {% if status[0] == 2 and status[1] == bill[2] %}
+              <div
+                id="cancel-dot"
+                class="d-flex justify-content-center align-items-center"
+              >
+                <i class="bi bi-dot"></i><span>Cita cancelada</span>
+              </div>
+              {% elif status[0] == 1 and status[1] == bill[2] %}
+              <div
+              id="pending-dot"
+              class="d-flex justify-content-center align-items-center"
+            >
+              <i class="bi bi-dot"></i><span>Pendiente</span>
+            </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+            
+        </td>
+        <td>
+          <div class="options-buttons">
+            <a href="/facturas/{{bill[2]}}"
+              ><button type="button">
+                <i class="bi bi-eye"></i>
+                Ver
+              </button></a
+            >
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  
+   <table>
+
+   </table>
 
     {% else %}
     <div class="d-flex justify-content-center detail-info-container">
