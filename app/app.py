@@ -286,8 +286,23 @@ def paciente_citas(paciente_id):
         (paciente_id,),
     )
     all_data = cursor.fetchall()
+    cursor.execute("SELECT * FROM pagos")
+    bills = cursor.fetchall()
+    cursor.execute("""
+    SELECT citas.id, citas.estado, pagos.estado
+    FROM citas
+    JOIN pagos
+    ON pagos.cita = citas.id
+    """)
+    appointments = cursor.fetchall()
     cursor.close()
-    return render_template("patient-appointment-list.html", data=all_data)
+    print(bills)
+    return render_template(
+        "patient-appointment-list.html",
+        data=all_data,
+        bills=bills,
+        appointments=appointments,
+    )
 
 
 """ Facturas """
@@ -473,7 +488,6 @@ def historial_detalles(element):
         cursor.execute("SELECT * FROM pacientes")
         data = cursor.fetchall()
         cursor.close()
-        print(data)
         return render_template("all_list.html", patients=data, element=element)
 
     elif element == "citas":
@@ -518,8 +532,9 @@ def historial_detalles(element):
         )
         appointment = cursor.fetchall()
         cursor.close()
-        print(appointment)
-        return render_template("all_list.html", bills=data, bills_appointments=appointment, element=element)
+        return render_template(
+            "all_list.html", bills=data, bills_appointments=appointment, element=element
+        )
 
 
 if __name__ == "__main__":

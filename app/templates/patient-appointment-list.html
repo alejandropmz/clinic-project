@@ -31,7 +31,19 @@
         {{data[1].strftime("%Y-%m-%d").split("-")[2]}}/{{data[1].strftime("%Y-%m-%d").split("-")[1]}}/{{data[1].strftime("%Y-%m-%d").split("-")[0]}}
       </td>
       <td>{{data[2]}} - {{data[3]}}</td>
-      <td>notas</td>
+      <td>
+        {% if bills %}
+          {% for bill in bills %}
+            {% if bill[7] == data[0] %}
+              {% if bill[5] == "" %}
+                No tiene observaciones
+              {% else %}
+                {{bill[5].capitalize()}}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </td>
       {% if data[6] == 1 %}
       <td>
         <div
@@ -51,9 +63,40 @@
         </div>
       </td>
       {% endif %}
-      <td>efectivo</td>
-      <td>pago</td>
-      <td>$ 200.000</td>
+      {% for bill in bills %}
+        {% if bill[7] == data[0] %}
+          <td>Efectivo</td>
+          <td>
+            {% if bill[6] == 1 %}
+              <div
+              id="approve-dot"
+              class="d-flex justify-content-center align-items-center"
+            >
+              <i class="bi bi-dot"></i><span>Pago</span>
+            </div>
+            {% else %}
+              {% for appointment in appointments %}
+                {% if appointment[0] == bill[7] and appointment[1] == 2 %}
+                  <div
+                    id="cancel-dot"
+                    class="d-flex justify-content-center align-items-center"
+                  >
+                    <i class="bi bi-dot"></i><span>Cita cancelada</span>
+                  </div>
+                {% elif appointment[0] == bill[7] and appointment[1] == 1 %}
+                <div
+                  id="pending-dot"
+                  class="d-flex justify-content-center align-items-center"
+                >
+                  <i class="bi bi-dot"></i><span>Pendiente</span>
+                </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </td>
+          <td>${{"{:,.2f}".format(bill[1]*0.19 + (bill[1]))}}</td>
+        {% endif %}
+      {% endfor %}
     </tr>
     {% endfor %}
   </table>
