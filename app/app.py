@@ -163,8 +163,20 @@ def detalle_cita(id):
         (id,),
     )
     appointment = cursor.fetchall()
+    print(appointment)
+    cursor.execute(
+        """
+    SELECT pagos.id
+    FROM pagos
+    WHERE pagos.cita = %s
+    """,
+        (appointment[0][0],),
+    )
+    bill_id = cursor.fetchone()[0]
     cursor.close()
-    return render_template("appointment-detail.html", appointment=appointment[0])
+    return render_template(
+        "appointment-detail.html", appointment=appointment[0], bill_id=bill_id
+    )
 
 
 @app.route("/editar_cita/<int:id>")
@@ -288,12 +300,14 @@ def paciente_citas(paciente_id):
     all_data = cursor.fetchall()
     cursor.execute("SELECT * FROM pagos")
     bills = cursor.fetchall()
-    cursor.execute("""
+    cursor.execute(
+        """
     SELECT citas.id, citas.estado, pagos.estado
     FROM citas
     JOIN pagos
     ON pagos.cita = citas.id
-    """)
+    """
+    )
     appointments = cursor.fetchall()
     cursor.close()
     print(bills)

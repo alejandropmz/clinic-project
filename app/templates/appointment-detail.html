@@ -25,7 +25,12 @@
     <label for="patient">
       <div>
         <span>Paciente</span>
-        <input value="{{appointment[7].title()}} {{appointment[8].title()}}" readonly type="text" name="patient" />
+        <input
+          value="{{appointment[7].title()}} {{appointment[8].title()}}"
+          readonly
+          type="text"
+          name="patient"
+        />
       </div>
     </label>
     <label for="date">
@@ -69,6 +74,11 @@
       <a href="/citas"><button type="button" id="back-button">Atrás</button></a>
       <a href="/editar_cita/{{appointment[0]}}"
         ><button type="button" id="modify-button">Modificar</button></a
+      >
+    </div>
+    <div class="bills">
+      <a href="/facturas/{{bill_id}}"
+        ><button type="button" id="send-bill-button">ver factura</button></a
       >
     </div>
   </form>
