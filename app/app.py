@@ -309,7 +309,6 @@ def paciente_citas(paciente_id):
     )
     appointments = cursor.fetchall()
     cursor.close()
-    print(bills)
     return render_template(
         "patient-appointment-list.html",
         data=all_data,
@@ -387,7 +386,6 @@ def detalle_facturas(id):
     iva = "{:,.2f}".format(amount_iva)
     total = "{:,.2f}".format(float(data[0][5]) + float(data[0][5] * 0.19))
     method_paid = data[0][16]
-    print(method_paid)
     return render_template(
         "bill-detail.html",
         all_data=data[0],
@@ -504,6 +502,7 @@ def historial_detalles(element):
         cursor.execute("SELECT * FROM pacientes")
         data = cursor.fetchall()
         cursor.close()
+        print(data[0])
         return render_template("all_list.html", patients=data, element=element)
 
     elif element == "citas":

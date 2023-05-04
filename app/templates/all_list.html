@@ -60,7 +60,7 @@
         {{patient[4].split("-")[2]}}/{{patient[4].split("-")[1]}}/{{patient[4].split("-")[0]}}
       </td>
       <td>
-        <a href="#"
+        <a href="/paciente_citas/{{patient[0]}}"
           ><button type="button" id="add-appointment-patient">
             Historial de consultas
           </button></a
@@ -83,7 +83,7 @@
       </td>
       <td>
         <div class="options-buttons">
-          <a href="#"
+          <a href="/pacientes/{{patient[0]}}"
             ><button type="button">
               <i class="bi bi-eye"></i>
               Ver
@@ -176,14 +176,14 @@
         <td>{{appointment[11].date().strftime("%Y-%m-%d").split("-")[2]}}/{{appointment[11].date().strftime("%Y-%m-%d").split("-")[1]}}/{{appointment[11].date().strftime("%Y-%m-%d").split("-")[0]}}</td>
         <td>
           <div class="options-buttons">
-            <a href="#"
+            <a href="/citas/{{appointment[0]}}"
               ><button>
                 <i class="bi bi-eye"></i>
                 Ver
               </button></a
             >
             {% if appointment[10] == 2 %} {% else %}
-            <a href="#"
+            <a href="/editar_cita/{{appointment[0]}}"
               ><button type="button">
                 <i class="bi bi-pencil-square"></i>
                 Modificar
