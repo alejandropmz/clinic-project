@@ -216,7 +216,8 @@
   margin: 0 3px;
 }
 
-#change-paid-button {
+#change-paid-button,
+#change-method-paid-button {
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -224,7 +225,8 @@
   color: white;
 }
 
-#change-paid-button:hover {
+#change-paid-button:hover,
+#change-method-paid-button:hover {
   background: var(--blue-hover);
   transition: all ease-in 0.3s;
 }

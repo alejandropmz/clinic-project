@@ -163,7 +163,6 @@ def detalle_cita(id):
         (id,),
     )
     appointment = cursor.fetchall()
-    print(appointment)
     cursor.execute(
         """
     SELECT pagos.id
@@ -362,7 +361,7 @@ def detalle_facturas(id):
         """
     SELECT pacientes.nombres, pacientes.apellidos, pacientes.identificacion, pacientes.contacto, pacientes.direccion,
     pagos.valor, pagos.valor_en_letras, pagos.fecha_pago, pagos.descripcion, pagos.id, pagos.estado, pagos.observaciones,
-    citas.fecha, citas.ingreso, citas.salida, citas.estado
+    citas.fecha, citas.ingreso, citas.salida, citas.estado, pagos.metodo_pago
     FROM pagos
     JOIN pagos_pacientes
     ON pagos_pacientes.id_pago = pagos.id
@@ -387,7 +386,8 @@ def detalle_facturas(id):
     amount_iva = float(data[0][5] * 0.19)
     iva = "{:,.2f}".format(amount_iva)
     total = "{:,.2f}".format(float(data[0][5]) + float(data[0][5] * 0.19))
-
+    method_paid = data[0][16]
+    print(method_paid)
     return render_template(
         "bill-detail.html",
         all_data=data[0],
@@ -398,6 +398,7 @@ def detalle_facturas(id):
         amount=amount,
         iva=iva,
         total=total,
+        method_paid=method_paid,
     )
 
 
@@ -459,8 +460,8 @@ def guardar_factura():
     ## guardar la info de los forms en la base de datos del pago
     cursor.execute(
         """
-    INSERT INTO pagos (valor, valor_en_letras, descripcion, estado, observaciones, cita)
-    VALUES (%s, %s, %s, %s, %s, %s)
+    INSERT INTO pagos (valor, valor_en_letras, descripcion, estado, observaciones, cita, metodo_pago)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
     """,
         (
             data["appointment-cost"],
@@ -469,6 +470,7 @@ def guardar_factura():
             pay_status,
             data["observations"],
             appointment_id,
+            data["paid-method"],
         ),
     )
 

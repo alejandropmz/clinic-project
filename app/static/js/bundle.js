@@ -134,19 +134,45 @@
           );
           if (detailContainer == null) {
             return "";
-          }
-          document
-            .getElementById("cancel-paid-button")
-            .addEventListener("click", function () {
-              document.getElementById("cancel-paid-button").remove();
-              detailContainer[0].style.margin = 0;
+          } else {
+            document
+              .getElementById("cancel-paid-button")
+              .addEventListener("click", function () {
+                document.getElementById("cancel-paid-button").remove();
+                detailContainer[0].style.margin = 0;
 
-              const payNotification = document.createElement("div");
-              payNotification.id = "pay-notification";
-              payNotification.classList.add("d-flex", "justify-content-center");
-              payNotification.innerHTML = `<i class="bi bi-exclamation-circle"></i>
+                const payNotification = document.createElement("div");
+                payNotification.id = "pay-notification";
+                payNotification.classList.add(
+                  "d-flex",
+                  "justify-content-center"
+                );
+                payNotification.innerHTML = `<i class="bi bi-exclamation-circle"></i>
               <p>Solo puedes eliminar facturas que aún no estén pagas</p>`;
-              document.body.appendChild(payNotification);
+                document.body.appendChild(payNotification);
+              });
+          }
+        });
+
+        /* change method paid */
+
+        document.addEventListener("DOMContentLoaded", function () {
+          document
+            .getElementById("change-method-paid-button")
+            .addEventListener("click", function () {
+              document.getElementById("change-method-paid-button").remove();
+
+              document.getElementById("met-paid-option").remove();
+
+              document.getElementById("method-pay").innerHTML = `
+              <h5>Método de pago:</h5>
+        <select name="paid-method" id="paid-method">
+          <option disabled selected value="">Seleccione método de pago</option>
+          <option value="efectivo">Efectivo</option>
+          <option value="datafono">Datáfono</option>
+          <option value="transferencia">Transferencia</option>
+        </select>
+              `;
             });
         });
 
@@ -180,6 +206,10 @@
 
             const payCheck = new FormData(document.getElementById("pay-check"));
 
+            const methodPayCreate = new FormData(
+              document.getElementById("method-pay-create")
+            );
+
             fetch("/guardar_factura", {
               method: "POST",
               body: new URLSearchParams([
@@ -189,6 +219,7 @@
                 ...lyricAmount,
                 ...observations,
                 ...payCheck,
+                ...methodPayCreate,
               ]),
             })
               .then(function (response) {

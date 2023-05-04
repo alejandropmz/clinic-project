@@ -396,6 +396,24 @@ select {
   margin-right: 2px;
 }
 
+#method-pay {
+  padding-left: 10px;
+  width: 40%;
+}
+
+#method-pay #paid-method {
+  border: solid var(--light-gray) 1px;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+#method-pay-create select {
+  padding-left: 10px;
+  width: 40%;
+  border: solid var(--light-gray) 1px;
+  outline: none;
+}
+
 /* media querys */
 
 @media screen and (min-width: 768px) {

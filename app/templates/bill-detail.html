@@ -269,22 +269,47 @@
         <tr>
           <th><small>Total a pagar</small></th>
           <td>
-            <input readonly value="${{total}}" id="total-cost-resumen" type="text" />
+            <input
+              readonly
+              value="${{total}}"
+              id="total-cost-resumen"
+              type="text"
+            />
           </td>
         </tr>
       </table>
     </div>
   </div>
 
+  <form id="method-pay">
+    <h5>Método de pago:</h5>
+    {% if method_paid == "efectivo" %}
+    <p id="met-paid-option">Efectivo</p>
+    {% elif method_paid == "datafono" %}
+    <p id="met-paid-option">Datáfono</p>
+    {% elif method_paid == "transferencia" %}
+    <p id="met-paid-option">Transferencia</p>
+    {% else %}
+    <p id="met-paid-option">No específicado</p>
+    {% endif %} {% if all_data[15] == 1 %} {% if all_data[10] == 2 %}
+    <button
+      style="margin-bottom: 10px"
+      id="change-method-paid-button"
+      type="button"
+    >
+      <small>Cambiar método de pago</small>
+    </button>
+    {% else %} {% endif %} {% else %} {% endif %}
+    
+  </form>
+
   <div class="d-flex" id="pay-status">
     <h5>Estado factura:</h5>
-    {% if all_data[15] == 1 %}
-      {% if all_data[10] == 2 %}
-        <p>pendiente</p>
-      {% else %}
-        <p>pago</p>
-      {% endif %}
+    {% if all_data[15] == 1 %} {% if all_data[10] == 2 %}
+    <p>pendiente</p>
     {% else %}
+    <p>pago</p>
+    {% endif %} {% else %}
     <p>Cita cancelada</p>
     {% endif %}
   </div>
@@ -307,16 +332,13 @@
 </div>
 
 <!-- paid button -->
-{% if all_data[15] == 1 %}
-  {% if all_data[10] == 2 %}
-  <div class="d-flex justify-content-center">
-    <a href="/pagar_factura/{{all_data[9]}}"
-      ><button type="button" id="change-paid-button">Factura paga</button></a
-    >
-  </div>
-  {% else %} {% endif %}
-{% else %}
-{% endif %}
+{% if all_data[15] == 1 %} {% if all_data[10] == 2 %}
+<div class="d-flex justify-content-center">
+  <a href="/pagar_factura/{{all_data[9]}}"
+    ><button type="button" id="change-paid-button">Factura paga</button></a
+  >
+</div>
+{% else %} {% endif %} {% else %} {% endif %}
 
 <!-- buttons -->
 <div class="d-flex justify-content-center" id="bill-buttons">
