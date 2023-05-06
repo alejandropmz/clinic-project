@@ -1,20 +1,22 @@
 @import url("general.css");
 @import url("bills.css");
+@import url("login.css");
 
 :root {
-  --blue: #144999;
-  --blue-hover: #103b7d;
-  --buttons-blue: #628eda;
-  --buttons-blue-hover: #2e5eb0;
-  --green-buttons: #26a132;
-  --green-buttons-hover: #1b7824;
+  --blue: #00909c;
+  --blue-hover: #066c76;
+  --buttons-blue: #83a6ba;
+  --buttons-blue-hover: #60879d;
+  --green-buttons: #3baba7;
+  --green-buttons-hover: #2f8784;
   --gray-borders: #adaaaa;
-  --light-gray: #efeaea;
-  --light-gray-hover: #d5d2d2;
+  --light-gray: #f1f1e8;
+  --light-gray-hover: #d9d9ce;
   --delete-red: #c42424;
   --delete-red-hover: #a81212;
   --approve-green: #04ad04;
   --cancel-red: #f03a3a;
+  --orange: #f47b26;
 }
 
 * {

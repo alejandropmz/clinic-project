@@ -79,7 +79,7 @@
               <small><p>Cedula</p></small>
             </div>
             <input
-              value="{{all_data[2]}}"
+              value="{{'{:,.0f}'.format(all_data[2]).replace(',','.')}}"
               type="text"
               name="client-id"
               readonly
@@ -101,7 +101,7 @@
               <small><p>Dirección</p></small>
             </div>
             <input
-              value="{{all_data[4]}}"
+              value="{{all_data[4].title()}}"
               type="text"
               name="client-address"
               readonly

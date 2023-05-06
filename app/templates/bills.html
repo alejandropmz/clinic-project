@@ -64,7 +64,7 @@
       <td>
         {{bill[3].strftime("%Y-%m-%d").split("-")[2]}}/{{bill[3].strftime("%Y-%m-%d").split("-")[1]}}/{{bill[3].strftime("%Y-%m-%d").split("-")[0]}}
       </td>
-      <td>${{"{:,.2f}".format(bill[4]+bill[4]*0.19)}}</td>
+      <td>${{"{:,.0f}".format(bill[4]+bill[4]*0.19).replace(',','.')}}</td>
       <td>
         {% if bill[5] == 1 %}
           <div

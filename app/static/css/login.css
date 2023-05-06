@@ -1,0 +1,87 @@
+#login-body {
+  background-image: url("images/fondo-login.jpg");
+  background-size: cover;
+}
+
+.login-general-container {
+  margin: 100px auto;
+  width: 800px;
+  box-shadow: 0 0 10px rgb(161, 159, 159);
+}
+
+.login-general-container .row {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#left-login {
+  background-color: var(--light-gray);
+  color: var(--blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  text-align: center;
+}
+
+#left-login p {
+  font-size: 0.9rem;
+}
+
+#left-login img {
+  width: 280px;
+}
+#left-login i {
+  font-size: 6rem;
+}
+
+#right-login {
+  background-color: var(--blue);
+  color: white;
+}
+
+#right-login form {
+  padding: 20px;
+  display: flex;
+  width: 100%;
+}
+
+#right-login form div {
+  margin: 25px 0;
+}
+
+#right-login form div input {
+  width: 100%;
+  background-color: transparent;
+  border: solid var(--light-gray);
+  border-width: 0 0 1px 0;
+  outline: none;
+  padding: 5px 0;
+  caret-color: var(--light-gray);
+}
+
+#right-login form div input::placeholder {
+  color: rgb(213, 208, 208);
+  font-size: 0.8rem;
+}
+
+#tems-conditions {
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+}
+
+#button-div button {
+  border: none;
+  background-color: var(--orange);
+  color: var(--light-gray);
+  border-radius: 2px;
+  padding: 5px 10px;
+  transition: background-color, color;
+  transition-duration: 600ms;
+}
+
+#button-div button:hover {
+  background-color: var(--light-gray);
+  color: var(--blue);
+}

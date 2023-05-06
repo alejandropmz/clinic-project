@@ -14,6 +14,12 @@ app.config["MYSQL_DB"] = "clinic"
 
 app.config["SECRET_KEY"] = "my_secret_key"
 
+""" Login """
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
 
 @app.route("/")
 @app.route("/pacientes")
