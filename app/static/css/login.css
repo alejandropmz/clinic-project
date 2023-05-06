@@ -48,6 +48,12 @@
   width: 100%;
 }
 
+#login-message {
+  padding: 2px 8px;
+  border: solid var(--light-gray);
+  border-width: 0 0 1px;
+}
+
 #right-login form div {
   margin: 25px 0;
 }
@@ -55,6 +61,7 @@
 #right-login form div input {
   width: 100%;
   background-color: transparent;
+  color: var(--light-gray);
   border: solid var(--light-gray);
   border-width: 0 0 1px 0;
   outline: none;

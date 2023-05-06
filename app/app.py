@@ -1,27 +1,75 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify, session
+from flask import (
+    Flask,
+    render_template,
+    redirect,
+    url_for,
+    request,
+    jsonify,
+    session,
+    flash,
+)
 from flask_mysqldb import MySQL
+from flask_bcrypt import Bcrypt
 from datetime import datetime
 
 
 app = Flask(__name__)
 
 mysql = MySQL(app)
+bcrypt = Bcrypt(app)
 
 app.config["MYSQL_HOST"] = "localhost"
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "123456"
 app.config["MYSQL_DB"] = "clinic"
 
-app.config["SECRET_KEY"] = "my_secret_key"
+app.config["SECRET_KEY"] = "I}luRJG$V:RHe4/9H,w./V)0ikb77p$X"
 
 """ Login """
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
 
 @app.route("/")
+def index():
+    return redirect(url_for("login"))
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if username == "" or password == "":
+            flash("Usuario y/o contraseña inválido")
+            return redirect(url_for("login"))
+
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM usuarios WHERE usuario = %s", (username,))
+        users = cursor.fetchall()
+        cursor.close()
+        if len(users) == 0:
+            flash("Usuario y/o contraseña inválido")
+            return redirect(url_for("login"))
+
+        print(users)
+
+        for user in users:
+            if user[1] == username and bcrypt.check_password_hash(user[2], password):
+                return redirect(url_for("pacientes"))
+            else:
+                flash("Error, usuario o clave inválido")
+                return redirect(url_for("login"))
+    else:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM usuarios")
+        users = cursor.fetchall()
+        cursor.close()
+        password = users[0][2]
+        hash_password = bcrypt.generate_password_hash(password).decode("utf-8")
+        """ print(users)
+        print(hash_password) """
+        return render_template("login.html")
+
+
 @app.route("/pacientes")
 def pacientes():
     cursor = mysql.connection.cursor()
