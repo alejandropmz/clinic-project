@@ -4,7 +4,7 @@
 }
 
 .login-general-container {
-  margin: 100px auto;
+  margin: 120px auto;
   width: 800px;
   box-shadow: 0 0 10px rgb(161, 159, 159);
 }
@@ -32,6 +32,7 @@
 #left-login img {
   width: 280px;
 }
+
 #left-login i {
   font-size: 6rem;
 }
@@ -84,4 +85,20 @@
 #button-div button:hover {
   background-color: var(--light-gray);
   color: var(--blue);
+}
+
+/* media querys */
+
+@media screen and (max-width: 768px) {
+  .login-general-container {
+    width: 85%;
+  }
+
+  #left-login {
+    height: 270px;
+  }
+
+  #left-login img {
+    width: 120px;
+  }
 }

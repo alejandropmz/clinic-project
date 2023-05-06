@@ -145,7 +145,7 @@
 }
 
 #forms table:first-child th {
-  background: #f4f1f1;
+  background: var(--light-gray);
   padding: 5px 0;
 }
 
