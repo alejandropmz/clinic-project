@@ -30,11 +30,32 @@ app.config["SECRET_KEY"] = "I}luRJG$V:RHe4/9H,w./V)0ikb77p$X"
 
 @app.route("/")
 def index():
-    return redirect(url_for("login"))
+    return redirect(url_for("ingreso"))
 
-@app.route("/registro")
+
+@app.route("/registro", methods=["GET", "POST"])
 def registro():
-    return render_template("signup.html")
+    if request.method == "POST":
+        user = request.form["user"]
+        email = request.form["email"]
+        password = request.form["password"]
+
+        # convertimos la clave en hash para mayor seguridad
+        password_hash = bcrypt.generate_password_hash(password)
+
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            """
+        INSERT INTO usuarios (usuario, correo, contrasena) VALUES (%s, %s, %s)
+        """,
+            (user, email, password_hash),
+        )
+        mysql.connection.commit()
+        cursor.close()
+        return redirect(url_for("registro"))
+
+    else:
+        return render_template("signup.html")
 
 
 @app.route("/ingreso", methods=["GET", "POST"])
@@ -42,26 +63,33 @@ def ingreso():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+
+
         if username == "" or password == "":
             flash("Usuario y/o contraseña inválido")
             return redirect(url_for("ingreso"))
+        
+        ## password_hash = bcrypt.generate_password_hash(password)
 
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM usuarios WHERE usuario = %s", (username,))
+        cursor.execute(
+            "SELECT * FROM usuarios WHERE usuario = %s OR correo = %s",
+            (username, username),
+        )
         users = cursor.fetchall()
         cursor.close()
         if len(users) == 0:
             flash("Usuario y/o contraseña inválido")
             return redirect(url_for("ingreso"))
 
-        print(users)
+        print(users[0][3])
+        print(password)
 
-        for user in users:
-            if user[1] == username and bcrypt.check_password_hash(user[2], password):
-                return redirect(url_for("pacientes"))
-            else:
-                flash("Error, usuario o clave inválido")
-                return redirect(url_for("ingreso"))
+        if (users[0][1] == username or users[0][2] == username) and bcrypt.check_password_hash(users[0][3], password):
+            return redirect(url_for("pacientes"))
+        else:
+            flash("Error, usuario o clave inválido")
+            return redirect(url_for("ingreso"))
     else:
         return render_template("login.html")
 

@@ -9,18 +9,22 @@
     />
   </div>
   <h5>Registrarse</h5>
-  <form action="">
+  <form action="/registro" method="POST">
     <div>
-      <label for="">Correo</label><br />
-      <input type="text" />
+      <label for="email">Correo</label><br />
+      <input
+        type="text"
+        name="email"
+        placeholder="Ingrese correo electrónico"
+      />
     </div>
     <div>
-      <label for="">Usuario</label><br />
-      <input type="text" />
+      <label for="user">Usuario</label><br />
+      <input type="text" name="user" placeholder="Ingrese usuario" />
     </div>
     <div>
-      <label for="">Contraseña</label><br />
-      <input type="text" />
+      <label for="password">Contraseña</label><br />
+      <input type="password" name="password" placeholder="Ingrese contraseña" />
     </div>
     <div class="d-flex justify-content-center">
       <button>Registrarse</button>

@@ -135,6 +135,9 @@
           if (detailContainer == null) {
             return "";
           } else {
+            if (document.getElementById("cancel-paid-button") == null) {
+              return "";
+            }
             document
               .getElementById("cancel-paid-button")
               .addEventListener("click", function () {
@@ -157,6 +160,9 @@
         /* change method paid */
 
         document.addEventListener("DOMContentLoaded", function () {
+          if (document.getElementById("change-method-paid-button") == null) {
+            return "";
+          }
           document
             .getElementById("change-method-paid-button")
             .addEventListener("click", function () {
@@ -229,6 +235,18 @@
                 window.location.href = data.redirect_url;
               });
           });
+        });
+
+        /* hash front password */
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const Login = document.getElementById("login");
+
+          if (Login == null) {
+            return "";
+          }
+
+          console.log(Login);
         });
 
         document.addEventListener("DOMContentLoaded", function () {

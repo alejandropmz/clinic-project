@@ -17,10 +17,10 @@
     message in messages %}
     <p id="login-message">{{message}}</p>
     {% endfor %} {% endif %} {% endwith %}
-    <form class="d-block" action="/ingreso" method="POST">
+    <form id="login" class="d-block" action="/ingreso" method="POST">
       <div>
-        <label for="username"> Usuario </label><br />
-        <input type="text" name="username" placeholder="Usuario" />
+        <label for="username"> Correo o usuario </label><br />
+        <input type="text" name="username" placeholder="Usuario o correo" />
       </div>
       <div>
         <label for="password"> Contraseña </label><br />
@@ -34,7 +34,9 @@
         <button type="submit">Ingresar</button>
       </div>
       <div id="button-div" class="d-flex justify-content-center">
-        <button id="sign-up" type="submit">Registrarse</button>
+        <a href="/registro"
+          ><button id="sign-up" type="button">Registrarse</button></a
+        >
       </div>
     </form>
   </div>
