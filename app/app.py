@@ -32,15 +32,19 @@ app.config["SECRET_KEY"] = "I}luRJG$V:RHe4/9H,w./V)0ikb77p$X"
 def index():
     return redirect(url_for("login"))
 
+@app.route("/registro")
+def registro():
+    return render_template("signup.html")
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
+
+@app.route("/ingreso", methods=["GET", "POST"])
+def ingreso():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         if username == "" or password == "":
             flash("Usuario y/o contraseña inválido")
-            return redirect(url_for("login"))
+            return redirect(url_for("ingreso"))
 
         cursor = mysql.connection.cursor()
         cursor.execute("SELECT * FROM usuarios WHERE usuario = %s", (username,))
@@ -48,7 +52,7 @@ def login():
         cursor.close()
         if len(users) == 0:
             flash("Usuario y/o contraseña inválido")
-            return redirect(url_for("login"))
+            return redirect(url_for("ingreso"))
 
         print(users)
 
@@ -57,16 +61,8 @@ def login():
                 return redirect(url_for("pacientes"))
             else:
                 flash("Error, usuario o clave inválido")
-                return redirect(url_for("login"))
+                return redirect(url_for("ingreso"))
     else:
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM usuarios")
-        users = cursor.fetchall()
-        cursor.close()
-        password = users[0][2]
-        hash_password = bcrypt.generate_password_hash(password).decode("utf-8")
-        """ print(users)
-        print(hash_password) """
         return render_template("login.html")
 
 
