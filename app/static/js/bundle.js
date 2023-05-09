@@ -39,6 +39,67 @@
   {
     1: [
       function (require, module, exports) {
+        /* general date */
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const generalDate = document.getElementById("general-date");
+          if (generalDate == null) {
+            return "";
+          }
+
+          const months = [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+          ];
+
+          // Time, date generator
+          const showTime = () => {
+            // get system time
+            var date = new Date();
+
+            // for time get all time and date information
+            var hour = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            var day = date.getDay();
+            // get month (months starts in 0)
+            var month = date.getMonth();
+            var year = date.getFullYear();
+            var amPm = hour <= 12 ? "AM" : "PM";
+            hour = hour > 12 ? hour - 12 : hour;
+
+            if (hour < 10) {
+              hour = "0" + hour;
+            }
+
+            if (seconds < 10) {
+              seconds = "0" + seconds;
+            }
+
+            /* show format */
+            var time = `Hora: ${hour}:${minutes}:${seconds}`;
+            var date = `Fecha: 0${day} de ${months[month]} del ${year}`;
+            var date2 = `Fecha: ${day} de ${months[month]} del ${year}`;
+
+            if (day <= 9) {
+              generalDate.innerHTML = `${date} <br> ${time} ${amPm}`;
+            } else {
+              generalDate.innerHTML = `${date2} <br> ${time} ${amPm}`;
+            }
+          };
+          setInterval(showTime, 1000);
+        });
+
         /* For the delete and update buttons */
         document.addEventListener("DOMContentLoaded", function () {
           const deleteButton = document.getElementById("delete-button");
