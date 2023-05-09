@@ -1,4 +1,5 @@
-{% extends "layout.html" %} {% block body %}
+{% extends "layout.html" %} {% block title %} Paciente {{patient[2].title()}} {%
+endblock %} {% block body %}
 
 <!-- sub-nav -->
 
@@ -100,15 +101,15 @@
     <!-- buttons -->
     <div class="d-flex justify-content-center detail-info-container-buttons">
       <a href="/pacientes"
-        ><button type="button" id="back-button">Ir a todos los pacientes</button></a
+        ><button type="button" id="back-button">
+          Ir a todos los pacientes
+        </button></a
       >
-      {% if patient[8] == 2 %}
-      {% else %}
+      {% if patient[8] == 2 %} {% else %}
       <a href="/editar_paciente/{{patient[0]}}">
         <button type="button" id="modify-button">Modificar</button>
       </a>
       {% endif %}
-
     </div>
   </form>
 </div>

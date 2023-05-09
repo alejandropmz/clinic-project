@@ -1,4 +1,5 @@
-{% extends "layout.html" %} {% block body %}
+{% extends "layout.html" %} {% block title %} Crear cita {% endblock %} {% block
+body %}
 
 <!-- sub-nav -->
 
@@ -22,14 +23,12 @@
         <span>Paciente</span>
         <select name="patient">
           <option disabled selected>Seleccione el paciente</option>
-          {% if patients %} {% for patient in patients %}
-          {% if patient[8] == 2 %}
-          {% else %}
+          {% if patients %} {% for patient in patients %} {% if patient[8] == 2
+          %} {% else %}
           <option value="{{patient[0]}}">
             {{patient[2].title()}} {{patient[3].title()}}
           </option>
-          {% endif %}
-          {% endfor %} {% endif %}
+          {% endif %} {% endfor %} {% endif %}
         </select>
       </div>
     </label>
